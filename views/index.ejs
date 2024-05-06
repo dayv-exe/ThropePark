@@ -6,17 +6,24 @@
   <title>Home</title>
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/">Areas</a></li>
-        <li><a href="/">Rides</a></li>
-        <li><a href="/">Contact Us</a></li>
-        <li><a href="/">FAQs</a></li>
-      </ul>
-    </nav>
-    <h1>Welcome to Thrope Park</h1>
+  <header id="home-header">
+    <%- include('./particles/NavBar.ejs') %>
+    <h1 id="home-title">Welcome to<br/><span>Thrope Park</span></h1>
+    <a id="home-action-btn" href="/">Start Exploring</a>
   </header>
+
+  <main id="home-main">
+    <div class="review-carosel">
+      <p>Some review</p>
+    </div>
+
+
+  </main>
 </body>
+
+<script>
+  function happy(){
+    return "hello";
+  }
+</script>
 </html>
