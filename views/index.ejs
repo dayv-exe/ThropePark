@@ -1,29 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/default-style.css">
+  <title>
+    <%= title %>
+  </title>
 </head>
+
 <body>
   <header id="home-header">
-    <%- include('./particles/NavBar.ejs') %>
-    <h1 id="home-title">Welcome to<br/><span>Thrope Park</span></h1>
-    <a id="home-action-btn" href="/">Start Exploring</a>
-  </header>
-
-  <main id="home-main">
-    <div class="review-carosel">
-      <p>Some review</p>
+    <div id="home-header-img">
+      <div id="home-header-img-darken"></div>
     </div>
 
+    <div class="header-content page-padding">
+      <!-- partial ejs not used for navbar here since home page header is special -->
+     <%- include('./particles/Navbar.ejs') %>
+
+      <div class="left m-center-column">
+        <h1 id="site-title">Welcome to <br> <span>Thrope Park</span></h1>
+        <a id="site-cab" class="action-btn-light image-button" href="/">Start exploring</a>
+
+        <div id="timing-box" class="abs center-column">
+          <h2>Opening Times</h2>
+          <p>Everyday</p>
+          <p>09:00 AM - 07:00 PM</p>
+          <p>April - October</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="center-column">
+    <div id="reviews-wrapper">
+      <h2 class="div-title">Reviews</h2>
+      <div id="reviews" class="carousel">
+        <div class="review carousel-item">
+          <img src="./images/UI/4stars.png" alt="star rating">
+          <p>"Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, tempora."</p>
+          <p>-Johnny Test</p>
+        </div>
+        <div class="review carousel-item">
+          <img src="./images/UI/5stars.png" alt="star rating">
+          <p>"Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, tempora."</p>
+          <p>-Johnny Test</p>
+        </div>
+        <div class="review carousel-item">
+          <img src="./images/UI/1stars.png" alt="star rating">
+          <p>"Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, tempora."</p>
+          <p>-Johnny Test</p>
+        </div>
+        
+      </div>
+    </div>
+
+    <div id="rides-areas-wrapper" class="center-column page-padding">
+      <div class="image-text-div-right">
+        <div class="text-section">
+          <h3 class="div-title">We know you'll love Thrope Park!</h3>
+          <p>head back to your own personal cabin to relax and recharge after a day packed full of thrills! Our
+            bite-sized rooms have everything you need for a perfect night's rest to refuel including complimentary
+            wi-fi, tea and coffee making facilities, interactive TV, mood lighting, en-suite with rain shower and super
+            comfy beds!</p>
+          <a class="image-button dark-button" href="/areas">Go To Areas</a>
+        </div>
+        <div class="image-section">
+          <img src="./images/parkimages/areas.jpg" alt="areas in park">
+        </div>
+      </div>
+
+      <div class="image-text-div-left">
+        <div class="text-section">
+          <h3 class="div-title">We know you'll love Thrope Park!</h3>
+          <p>head back to your own personal cabin to relax and recharge after a day packed full of thrills! Our
+            bite-sized rooms have everything you need for a perfect night's rest to refuel including complimentary
+            wi-fi, tea and coffee making facilities, interactive TV, mood lighting, en-suite with rain shower and super
+            comfy beds!</p>
+          <a class="image-button dark-button" href="/rides">Go To Rides</a>
+        </div>
+        <div class="image-section">
+          <img src="./images/parkimages/rides.jpg" alt="areas in park">
+        </div>
+      </div>
+    </div>
+
+    <div id="gallery-wrapper">
+      <h2 id="gallery-title" class="div-title">Gallery</h2>
+      <div id="gallery" class="carousel-image">
+        <img class="carousel-image-item" src="./images/parkimages/gallery-pic1.jpg" alt="">
+        <img class="carousel-image-item" src="./images/parkimages/gallery-pic2.jpg" alt="">
+        <img class="carousel-image-item" src="./images/parkimages/gallery-pic3.jpg" alt="">
+      </div>
+    </div>
+
+    <div id="mission-wrapper">
+      <h2 class="div-title">Our Mission</h2>
+      <div id="mission" class="center-column">
+        <img src="../images/parkimages/realceo.jpg" alt="picture of CEO">
+        <h3>Daniel Parker, CEO</h3>
+        <p>“Hear ye, within the sacred grounds of Thrope Park, we pledge to weave tales of joy and wonder, crafting
+          experiences that transport the soul to realms both fantastical and enchanting. Our noble quest is to provide
+          resplendent entertainment, where laughter dances upon the breeze and memories are etched into the annals of
+          time.”</p>
+      </div>
+    </div>
+
+    <div id="contact-wrapper">
+      <h2 class="div-title">Get In Touch</h2>
+      <form action="/">
+        <div id="name-wrapper" class="left-center-column">
+          <label id="name-label" for="name">Full Name:</label>
+          <input class="custom-textbox" type="text" name="name" id="name" placeholder="e.g. John Appleseed">
+        </div>
+        <div id="email-wrapper" class="left-center-column">
+          <label id="email-label" for="email">Email:</label>
+          <input class="custom-textbox" type="email" name="email" id="email" placeholder="e.g. john@thrilled.fun">
+        </div>
+        <div id="message-wrapper" class="left-center-column">
+          <label id="message-label" for="message">Message:</label>
+          <textarea class="custom-textbox" name="message" id="message" placeholder="Say something..."></textarea>
+        </div>
+        <div id="button-wrapper" class="center-column">
+          <input class="dark-button" id="submit-form" type="submit" value="Send">
+        </div>
+      </form>
+    </div>
 
   </main>
+
+  <script>
+    // to toggle navbar
+    const menuBtn = document.getElementById("mobile-nav-bar-btn");
+    const navbar = document.getElementById("home-nav");
+
+    function showNavbar(state = true) {
+      navbar.style.display = state ? "flex" : "none";
+    }
+
+    function toggleNavbar() {
+      if (navbar.style.display == "flex") {
+        showNavbar(false);
+      } else {
+        showNavbar();
+      }
+    }
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 885) {
+        showNavbar();
+      }
+      else {
+        showNavbar(false);
+      }
+    })
+
+  </script>
 </body>
 
-<script>
-  function happy(){
-    return "hello";
-  }
-</script>
 </html>
