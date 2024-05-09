@@ -1,0 +1,20 @@
+<div id="contact-wrapper">
+  <h2 class="div-title"><%= title %></h2>
+  <form action="/">
+    <div id="name-wrapper" class="left-center-column">
+      <label id="name-label" for="name">Full Name:</label>
+      <input class="custom-textbox" type="text" name="name" id="name" placeholder="e.g. John Appleseed">
+    </div>
+    <div id="email-wrapper" class="left-center-column">
+      <label id="email-label" for="email">Email:</label>
+      <input class="custom-textbox" type="email" name="email" id="email" placeholder="e.g. john@thrilled.fun">
+    </div>
+    <div id="message-wrapper" class="left-center-column">
+      <label id="message-label" for="message"><%= messageLabelText %></label>
+      <textarea class="custom-textbox" name="message" id="message" placeholder="Say something..."></textarea>
+    </div>
+    <div id="button-wrapper" class="center-column">
+      <input class="dark-button" id="submit-form" type="submit" value=<%= submitButtonText %>>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,16 @@
+<div id="reviews-wrapper">
+  <h2 class="div-title">Reviews</h2>
+  <div id="reviews" class="carousel">
+
+    <%- include('./Review.ejs', {noStars: 2, reviewComment: "Would this work?", reviewer: "Johnny Test"}) %>
+
+    <%- include('./Review.ejs', {noStars: 5, reviewComment: "Would this work?", reviewer: "Johnny Test"}) %>
+
+    <%- include('./Review.ejs', {noStars: 4, reviewComment: "Would this work?", reviewer: "Johnny Test"}) %>
+
+    <%- include('./Review.ejs', {noStars: 1, reviewComment: "", reviewer: "Johnny Test"}) %>
+
+    <%- include('./Review.ejs', {noStars: 2, reviewComment: "Would this work?", reviewer: "Johnny Test"}) %>
+
+  </div>
+</div>

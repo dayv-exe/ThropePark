@@ -1,0 +1,27 @@
+<div class="event">
+
+  <div class="top">
+    <div id="name-date" class="left-center-column">
+      <h2 class="card-title"><%= title %></h2>
+      <p><%= date %></p>
+    </div>
+
+    <div id="tags" class="center-row">
+      <p>tags: </p>
+      <% for( let i = 0; i < tags.length; i++ ) { %>
+        <div class="tag">
+          <p><%= tags[i] %></p>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="bottom">
+
+    <p class="div-paragraph"><%= description %></p>
+
+    <a class="dark-button" href="events/<%= title %>">View</a>
+
+  </div>
+
+</div>

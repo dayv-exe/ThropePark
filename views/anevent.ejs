@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles/style.css">
+  <title><%= title %></title>
+</head>
+<body>
+  <%- include('./particles/NestedPageHeader.ejs', {title: title}) %>
+  <div class="center-column">
+    
+    <%- include('./particles/LineOfInfo.ejs', {infoText: "This event has concluded!"}) %>
+
+    <div class="page-padding">
+      <div class="event selected-event">
+
+        <div class="top">
+          <div id="name-date" class="left-center-column">
+             <p>Event Date: 2024-09-11</p>
+          </div>
+      
+          <div id="tags" class="center-row">
+            <p>tags: </p>
+            <div class="tag">
+              <p>a tag</p>
+            </div>
+          </div>
+        </div>
+      
+        <div class="bottom">
+      
+          <p class="div-paragraph">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint ea iure laudantium eos a, est earum inventore excepturi placeat quis eius quidem ratione reiciendis delectus culpa porro quisquam praesentium similique sit pariatur molestias saepe nobis aperiam? Nostrum pariatur facilis repudiandae harum explicabo, nihil dolorum corporis incidunt ipsum quis quia? Doloremque.</p>
+
+          <div id="event-socials" class="left-center-row">
+            <p>Views: 420</p>
+            <p>Interested: 69</p>
+          </div>
+
+          <a href="/" class="dark-button">I'm In!</a>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+</body>
+</html>

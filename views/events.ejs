@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles/style.css">
+  <title>
+    <%= title %>
+  </title>
+</head>
+
+<body>
+  <%- include('./particles/PageHeader.ejs', {title: title}) %>
+    <main class="center-column">
+      <div class="page-padding center-column">
+        <div id="upcoming-events-wrapper">
+          <h2 class="div-title">Upcoming Events</h2>
+
+          <div class="events div-top-gap">
+
+            <%- include('./particles/Event.ejs', {title: "Summer Jam 2024", date: "2024-09-11", tags: ["Dance", "Festival"], description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste aperiam laudantium rem pariatur magni voluptas voluptatibus fugit, voluptatem quibusdam fuga quidem illo reiciendis. Esse veritatis at iusto maiores voluptatum, placeat illo aperiam numquam autem similique sapiente facere fugit, fuga provident? Ipsum debitis blanditiis consectetur necessitatibus quas vitae eos fugit doloremque!"}) %>
+
+            <%- include('./particles/Event.ejs', {title: "New York Airshow", date: "2024-09-11", tags: ["Fireworks", "Demolition"], description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste aperiam laudantium rem pariatur magni voluptas voluptatibus fugit, voluptatem quibusdam fuga quidem illo reiciendis. Esse veritatis at iusto maiores voluptatum, placeat illo aperiam numquam autem similique sapiente facere fugit, fuga provident? Ipsum debitis blanditiis consectetur necessitatibus quas vitae eos fugit doloremque!"}) %>
+          </div>
+        </div>
+
+        <div id="concluded-events-wrapper" class="div-top-gap">
+          <h2 class="div-title">Concluded Events</h2>
+
+          <div class="events div-top-gap">
+
+            <%- include('./particles/Event.ejs', {title: "Summer Jam 2024", date: "2024-09-11", tags: ["Dance", "Festival"], description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste aperiam laudantium rem pariatur magni voluptas voluptatibus fugit, voluptatem quibusdam fuga quidem illo reiciendis. Esse veritatis at iusto maiores voluptatum, placeat illo aperiam numquam autem similique sapiente facere fugit, fuga provident? Ipsum debitis blanditiis consectetur necessitatibus quas vitae eos fugit doloremque!"}) %>
+
+            <%- include('./particles/Event.ejs', {title: "Summer Jam 2024", date: "2024-09-11", tags: ["Dance", "Festival"], description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste aperiam laudantium rem pariatur magni voluptas voluptatibus fugit, voluptatem quibusdam fuga quidem illo reiciendis. Esse veritatis at iusto maiores voluptatum, placeat illo aperiam numquam autem similique sapiente facere fugit, fuga provident? Ipsum debitis blanditiis consectetur necessitatibus quas vitae eos fugit doloremque!"}) %>
+          </div>
+        </div>
+
+      </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles/style.css">
+  <title>
+    <%= title %>
+  </title>
+</head>
+
+<body>
+  <%- include('./particles/PageHeader.ejs', {title: title}) %>
+    <main class="center-column">
+      <div class="page-padding div-bottom-gap center-column">
+        <%- include('./particles/ImgTextDiv.ejs', { imgAlign: "left" , title: "Ready for lift off!" ,
+          bodyText: "head back to your own personal cabin to relax and recharge after a day packed full of thrills! Our bite-sized rooms have everything you need for a perfect night's rest to refuel including complimentary wi-fi, tea and coffee making facilities, interactive TV, mood lighting, en-suite with rain shower and super comfy beds!"
+          , imgPath: "./images/parkimages/rides.jpg" , imgAlt: "areas" }) %>
+          <div id="adventure-cove-wrapper" class="div-top-gap">
+            <h2 class="div-title">Adventure Cove Area Rides</h2>
+            <p class="div-paragraph">Behold, travelers, as ye enter Adventure Cove, a realm of perilous quests and
+              boundless wonders. Here, amidst the roaring waves and rugged shores, ye shall find tales of
+              swashbuckling
+              pirates, hidden treasures, and untamed wilderness.</p>
+            <div class="center-wrap card-wrap">
+              <%- include('./particles/Card.ejs', { imgPath: "./images/rides/adventure-cove1.jpg" ,
+                imgAlt: "pirate_plunge" , title: "Pirate Plunge" ,
+                bodyText: "Thrope park has four different areas to explore our full range of attractions, rides and rollercoasters. Don't forget to check out our seasonal events. From Mardi Gras to Fright Nights, there's something for everyone!"
+                , linkHref: "/rides/Pirate Plunge" , linkText: "Go To Ride" }) %>
+
+                <%- include('./particles/Card.ejs', { imgPath: "./images/rides/adventure-cove2.jpg" ,
+                  imgAlt: "jungle_jive" , title: "Jungle Jive Rapids" ,
+                  bodyText: "Thrope park has four different areas to explore our full range of attractions, rides and rollercoasters. Don't forget to check out our seasonal events. From Mardi Gras to Fright Nights, there's something for everyone!"
+                  , linkHref: "/rides/Jungle Jive Rapids" , linkText: "Go To Ride" }) %>
+
+                  <%- include('./particles/Card.ejs', { imgPath: "./images/rides/adventure-cove3.jpg" ,
+                    imgAlt: "treasure_hunt" , title: "Treasure Hunt Falls" ,
+                    bodyText: "Thrope park has four different areas to explore our full range of attractions, rides and rollercoasters. Don't forget to check out our seasonal events. From Mardi Gras to Fright Nights, there's something for everyone!"
+                    , linkHref: "/rides/Adventure Cove" , linkText: "Go To Ride" }) %>
+            </div>
+          </div>
+
+          <div id="fantasy-zone-wrapper" class="div-top-gap">
+            <h2 class="div-title">Fantasy Kingdom Zone Rides</h2>
+            <p class="div-paragraph">Welcome, noble souls, to the realm of Fantasy Kingdom, where dreams take flight
+              and magic reigns supreme. Within these hallowed grounds, ye shall encounter mythical creatures,
+              enchanted castles, and epic adventures beyond imagination.</p>
+            <div class="center-wrap card-wrap">
+              <%- include('./particles/Card.ejs', { imgPath: "./images/rides/wildwest-frontier1.jpg" ,
+                imgAlt: "enchanted_castle_drop" , title: "Enchanted Castle Drop" ,
+                bodyText: "Thrope park has four different areas to explore our full range of attractions, rides and rollercoasters. Don't forget to check out our seasonal events. From Mardi Gras to Fright Nights, there's something for everyone!"
+                , linkHref: "/rides/Enchanted Castle Drop" , linkText: "Go To Ride" }) %>
+
+                <%- include('./particles/Card.ejs', { imgPath: "./images/rides/wildwest-frontier2.jpg" ,
+                  imgAlt: "unicorn_carousel" , title: "Unicorn Carousel" ,
+                  bodyText: "Thrope park has four different areas to explore our full range of attractions, rides and rollercoasters. Don't forget to check out our seasonal events. From Mardi Gras to Fright Nights, there's something for everyone!"
+                  , linkHref: "/rides/Unicorn Carousel" , linkText: "Go To Ride" }) %>
+
+                  <%- include('./particles/Card.ejs', { imgPath: "./images/rides/wildwest-frontier3.jpg" ,
+                    imgAlt: "Dragons_Roar_Coaster" , title: "Dragons Roar Coaster" ,
+                    bodyText: "Thrope park has four different areas to explore our full range of attractions, rides and rollercoasters. Don't forget to check out our seasonal events. From Mardi Gras to Fright Nights, there's something for everyone!"
+                    , linkHref: "/rides/Dragons Roar Coaster" , linkText: "Go To Ride" }) %>
+            </div>
+          </div>
+
+          <div id="scifi-galaxy-wrapper" class="div-top-gap">
+            <h2 class="div-title">Sci-Fi Galaxy Zone Rides</h2>
+            <p class="div-paragraph">Behold, intrepid voyagers, the wonders of Sci-Fi Galaxy, a realm where the
+              boundaries of space and time are but mere illusions. Here, amidst the stars and distant planets, ye
+              shall embark upon daring expeditions, engage in cosmic battles, and unravel the mysteries of the
+              universe.</p>
+            <div class="center-wrap card-wrap">
+              <%- include('./particles/Card.ejs', { imgPath: "./images/rides/scifi-galaxy1.jpg" ,
+                imgAlt: "Starship_Simulator" , title: "Starship Simulator" ,
+                bodyText: "Thrope park has four different areas to explore our full range of attractions, rides and rollercoasters. Don't forget to check out our seasonal events. From Mardi Gras to Fright Nights, there's something for everyone!"
+                , linkHref: "/rides/Starship Simulator" , linkText: "Go To Ride" }) %>
+
+                <%- include('./particles/Card.ejs', { imgPath: "./images/rides/scifi-galaxy2.jpg" ,
+                  imgAlt: "Alien_Invasion_Rollercoaster" , title: "Alien Invasion Rollercoaster" ,
+                  bodyText: "Thrope park has four different areas to explore our full range of attractions, rides and rollercoasters. Don't forget to check out our seasonal events. From Mardi Gras to Fright Nights, there's something for everyone!"
+                  , linkHref: "/rides/Alien Invasion Rollercoaster" , linkText: "Go To Ride" }) %>
+
+                  <%- include('./particles/Card.ejs', { imgPath: "./images/rides/scifi-galaxy3.jpg" ,
+                    imgAlt: "space_explorer_orbiter" , title: "Space Explorer Orbiter" ,
+                    bodyText: "Thrope park has four different areas to explore our full range of attractions, rides and rollercoasters. Don't forget to check out our seasonal events. From Mardi Gras to Fright Nights, there's something for everyone!"
+                    , linkHref: "/rides/Space Explorer Orbiter" , linkText: "Go To Ride" }) %>
+            </div>
+          </div>
+
+          <div id="scifi-galaxy-wrapper" class="div-top-gap">
+            <h2 class="div-title">Wild West Frontier Territory Rides</h2>
+            <p class="div-paragraph">Hark, travelers, to the untamed wilderness of Wild West Frontier, where rugged
+              landscapes and lawless towns beckon the brave and adventurous. Amidst rolling plains and dusty trails,
+              ye shall find tales of daring outlaws, courageous cowboys, and the pursuit of fortune and glory.</p>
+            <div class="center-wrap card-wrap">
+              <%- include('./particles/Card.ejs', { imgPath: "./images/rides/fantasy-kingdom1.jpg" ,
+                imgAlt: "outlaw_run" , title: "Outlaw Run Mine Train" ,
+                bodyText: "Thrope park has four different areas to explore our full range of attractions, rides and rollercoasters. Don't forget to check out our seasonal events. From Mardi Gras to Fright Nights, there's something for everyone!"
+                , linkHref: "/rides/Outlaw Run Mine Train" , linkText: "Go To Ride" }) %>
+
+                <%- include('./particles/Card.ejs', { imgPath: "./images/rides/fantasy-kingdom2.jpg" ,
+                  imgAlt: "Bucking_bronco" , title: "Bucking Bronco Roundup" ,
+                  bodyText: "Thrope park has four different areas to explore our full range of attractions, rides and rollercoasters. Don't forget to check out our seasonal events. From Mardi Gras to Fright Nights, there's something for everyone!"
+                  , linkHref: "/rides/Bucking Bronco Roundup" , linkText: "Go To Ride" }) %>
+
+                  <%- include('./particles/Card.ejs', { imgPath: "./images/rides/fantasy-kingdom3.jpg" ,
+                    imgAlt: "gold_rush_rapids" , title: "Gold Rush Rapids" ,
+                    bodyText: "Thrope park has four different areas to explore our full range of attractions, rides and rollercoasters. Don't forget to check out our seasonal events. From Mardi Gras to Fright Nights, there's something for everyone!"
+                    , linkHref: "/rides/Gold Rush Rapids" , linkText: "Go To Ride" }) %>
+            </div>
+          </div>
+      </div>
+
+      <%- include('./particles/Reviews.ejs') %>
+    </main>
+</body>
+
+</html>

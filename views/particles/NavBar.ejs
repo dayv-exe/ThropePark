@@ -1,12 +1,100 @@
-<nav id="home-nav" class="left-center-row">
-  <a href="/">Home</a>
-  <a href="/">Areas</a>
-  <a href="/">Rides</a>
-  <a href="/">Contact Us</a>
-  <a href="/">FAQs</a>
-  <a href="/">More</a>
+<nav id="nav" class="left-center-row">
+  <a href="/" class="hover-react">Home</a>
+  <a href="/areas" class="hover-react">Areas</a>
+  <a href="/rides" class="hover-react">Rides</a>
+  <a href="/contact" class="hover-react">Contact Us</a>
+  <a href="/faqs" class="hover-react">FAQs</a>
+  <button id="more-nav-btn" class="image-button" onclick="toggleMoreMenuItems()">More</button>
+  <div id="more-nav" class="left-center-column">
+    <a href="/events" class="hover-react">Events</a>
+    <a href="/activity" class="hover-react">Activity</a>
+    <a href="/create" class="hover-react">*create*</a>
+  </div>
+
+  <a href="/events" class="hover-react mobile-more">Events</a>
+  <a href="/activity" class="hover-react mobile-more">Activity</a>
+  <a href="/create" class="hover-react mobile-more">*create*</a>
 </nav>
 
-<button id="mobile-nav-bar-btn" class="abs image-button" onclick="toggleNavbar()">
+<button id="mobile-nav-bar-btn" class="abs image-button" onclick="toggleMobileNavbar()">
   <img src="./images/UI/menu.png" alt="menu hamburger">
 </button>
+
+<script>
+  // home, areas, rides, contact, faqs, more: events, activities, create
+  // other: event, area, ride
+  // to toggle navbar
+
+  const navbar = document.getElementById("nav"); // navbar
+
+  const mobileNavBtn = document.getElementById("mobile-nav-bar-btn");
+  const moreBtn = document.getElementById("more-nav-btn");
+
+  const moreNavElements = document.getElementById("more-nav");
+  const moreMobileNavElements = document.getElementsByClassName("mobile-more");
+
+  // #region MOBILE NAVBAR TOGGLE
+  function showMobileNavbar(state = true) {
+    if (window.innerWidth > 885) {
+      navbar.style.display = "flex";
+      return;
+    }
+    navbar.style.display = state ? "flex" : "none";
+  }
+
+  function toggleMobileNavbar() {
+    if (navbar.style.display == "flex") {
+      showMobileNavbar(false);
+    } else {
+      showMobileNavbar();
+    }
+  }
+  // #endregion
+
+  // #region MORE MENU ITEMS TOGGLE
+
+  function showMoreMenuItems(state = true) {
+    moreNavElements.style.display = state ? "flex" : "none";
+  }
+
+  function showMoreMobileMenuItems(state = true) {
+    for (let i = 0; i < moreMobileNavElements.length; i++) {
+      moreMobileNavElements[i].style.display = state ? "flex" : "none"
+    }
+  }
+
+  function toggleMoreMenuItems() {
+    if (window.innerWidth > 885) {
+      // if is not in mobile view
+      showMoreMobileMenuItems(false);
+      if (moreNavElements.style.display == "flex") {
+        showMoreMenuItems(false);
+      } else {
+        showMoreMenuItems(true);
+      }
+    } else {
+      // if is not in mobile view
+      showMoreMenuItems(false);
+      if (moreMobileNavElements[0].style.display == "flex") {
+        showMoreMobileMenuItems(false);
+      } else {
+        showMoreMobileMenuItems(true);
+      }
+    }
+  }
+
+  // #endregion
+
+  function hideAll() {
+    showMoreMenuItems(false);
+    showMoreMobileMenuItems(false);
+    showMobileNavbar(false);
+  }
+
+  window.addEventListener("resize", () => {
+    hideAll();
+  });
+
+  hideAll();
+
+</script>

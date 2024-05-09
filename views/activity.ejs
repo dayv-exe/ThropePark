@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles/style.css">
+  <title>
+    <%= title %>
+  </title>
+</head>
+
+<body>
+  <%- include('./particles/PageHeader.ejs', {title: title}) %>
+
+    <div class="game-wrapper center-column">
+      <h2 class="div-title">Match Making Game</h2>
+      <p class="card-paragraph">Match all the correct images to each other!</p>
+
+      <div id="game-stats">
+        <!-- <div class="game-text-image center-row">
+          <img src="./images/UI/timer.png" alt="timer">
+          <p>01:30</p>
+        </div> -->
+
+        <div class="game-label">
+          <p id="game-moves">Moves: 0</p>
+        </div>
+
+        <div class="game-label">
+          <p id="game-matches">Matches: 0</p>
+        </div>
+
+        <div class="game-label">
+          <p id="game-mistakes">Mistakes: 0</p>
+        </div>
+
+        <button class="game-text-image center-row" onclick="reset()">
+          <img src="./images/UI/restart.png" alt="restart">
+          Reset
+        </button>
+      </div>
+
+      <div id="game">
+        <div id="game-tile-1">
+          <div id="tile-cover-1"></div>
+        </div>
+        <div id="game-tile-2">
+          <div id="tile-cover-2"></div>
+        </div>
+        <div id="game-tile-3">
+          <div id="tile-cover-3"></div>
+        </div>
+        <div id="game-tile-4">
+          <div id="tile-cover-4"></div>
+        </div>
+        <div id="game-tile-5">
+          <div id="tile-cover-5"></div>
+        </div>
+        <div id="game-tile-6">
+          <div id="tile-cover-6"></div>
+        </div>
+        <div id="game-tile-7">
+          <div id="tile-cover-7"></div>
+        </div>
+        <div id="game-tile-8">
+          <div id="tile-cover-8"></div>
+        </div>
+        <div id="game-tile-9">
+          <div id="tile-cover-9"></div>
+        </div>
+        <div id="game-tile-10">
+          <div id="tile-cover-10"></div>
+        </div>
+        <div id="game-tile-11">
+          <div id="tile-cover-11"></div>
+        </div>
+        <div id="game-tile-12">
+          <div id="tile-cover-12"></div>
+        </div>
+        <div id="game-tile-13">
+          <div id="tile-cover-13"></div>
+        </div>
+        <div id="game-tile-14">
+          <div id="tile-cover-14"></div>
+        </div>
+        <div id="game-tile-15">
+          <div id="tile-cover-15"></div>
+        </div>
+        <div id="game-tile-16">
+          <div id="tile-cover-16"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let matches = 0;
+      let mistakes = 0;
+      let moves = 0;
+
+      const matchesLbl = document.getElementById("game-matches");
+      const movesLbl = document.getElementById("game-moves");
+      const mistakesLbl = document.getElementById("game-mistakes");
+
+      function addMatches() {
+        matches++;
+        setGameStatus();
+
+        if (matches == 8) {
+          setTimeout(() => {
+            reset();
+            window.alert("You Win!!!");
+          }, 300);
+        }
+      }
+
+      function addMistakes() {
+        mistakes++;
+        setGameStatus();
+      }
+
+      function addMoves() {
+        moves++;
+        setGameStatus();
+      }
+
+      function setGameStatus() {
+        matchesLbl.innerHTML = `Matches: ${matches}`;
+        movesLbl.innerHTML = `moves: ${moves}`;
+        mistakesLbl.innerHTML = `Mistakes: ${mistakes}`;
+      }
+
+      function randomizeList(theList) {
+        // returns an new list with elements of original list in random order
+        // Make a copy of the original array to avoid modifying it directly
+        const shuffledArray = theList.slice();
+
+        for (let i = shuffledArray.length - 1; i > 0; i--) {
+          const randomIndex = Math.floor(Math.random() * (i + 1)); // 0 all to length of array - 1
+          [shuffledArray[i], shuffledArray[randomIndex]] = [shuffledArray[randomIndex], shuffledArray[i]];
+        }
+
+        return shuffledArray;
+      }
+
+      let images = randomizeList([
+        "./images/game files/img1.png",
+        "./images/game files/img2.png",
+        "./images/game files/img3.png",
+        "./images/game files/img4.png",
+        "./images/game files/img5.png",
+        "./images/game files/img6.png",
+        "./images/game files/img7.png",
+        "./images/game files/img8.png",
+        "./images/game files/img9.png",
+        "./images/game files/img10.png"
+      ]);
+
+      let firstImages = [];
+      let secondImages = [];
+
+      function pickImages() {
+        for (let i = 0; i < 8; i++) {
+          firstImages[i] = images[i]
+        }
+
+        secondImages = randomizeList(firstImages);
+      }
+
+      const tile1 = document.getElementById("game-tile-1");
+      const tile2 = document.getElementById("game-tile-2");
+      const tile3 = document.getElementById("game-tile-3");
+      const tile4 = document.getElementById("game-tile-4");
+      const tile5 = document.getElementById("game-tile-5");
+      const tile6 = document.getElementById("game-tile-6");
+      const tile7 = document.getElementById("game-tile-7");
+      const tile8 = document.getElementById("game-tile-8");
+      const tile9 = document.getElementById("game-tile-9");
+      const tile10 = document.getElementById("game-tile-10");
+      const tile11 = document.getElementById("game-tile-11");
+      const tile12 = document.getElementById("game-tile-12");
+      const tile13 = document.getElementById("game-tile-13");
+      const tile14 = document.getElementById("game-tile-14");
+      const tile15 = document.getElementById("game-tile-15");
+      const tile16 = document.getElementById("game-tile-16");
+
+      const tiles = [tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9, tile10, tile11, tile12, tile13, tile14, tile15, tile16];
+
+      let openedTiles = new Set([]);
+
+      function reset() {
+        openedTiles.clear();
+        matches = 0;
+        moves = 0;
+        mistakes = 0;
+
+        setGameStatus();
+
+        closeAllTiles();
+
+        images = randomizeList(images);
+        pickImages();
+
+        readyTiles();
+      }
+
+      function compareTiles() {
+        addMoves();
+        const openedTilesArr = [...openedTiles];
+
+        const firstTileImg = document.getElementById(`game-tile-${openedTilesArr[0]}`).style.backgroundImage;
+        const secondTileImg = document.getElementById(`game-tile-${openedTilesArr[1]}`).style.backgroundImage;
+
+        if (firstTileImg == secondTileImg) {
+          addMatches();
+          openedTiles.clear();
+        } else {
+          setTimeout(() => {
+            addMistakes();
+            closeTile(openedTilesArr[0]);
+            closeTile(openedTilesArr[1]);
+          }, 500)
+        }
+      }
+
+      function openTile(tileNumber) {
+        const currTile = document.getElementById(`tile-cover-${tileNumber}`);
+        currTile.style.backgroundColor = "transparent";
+        openedTiles.add(tileNumber);
+      }
+
+      function closeTile(tileNumber) {
+        const currTile = document.getElementById(`tile-cover-${tileNumber}`);
+        currTile.style.backgroundColor = "white";
+        openedTiles.delete(tileNumber);
+      }
+
+      function closeAllTiles() {
+        for (let i = 0; i < 16; i++) {
+          closeTile(i + 1);
+        }
+      }
+
+      function handleTileClick(tileNumber) {
+        const currTile = document.getElementById(`tile-cover-${tileNumber}`);
+        if (openedTiles.size == 2 || currTile.style.backgroundColor == "transparent") {
+          return;
+        }
+
+        openTile(tileNumber);
+
+        if (openedTiles.size == 2) {
+          compareTiles();
+        }
+      }
+
+      function readyTiles() {
+        pickImages();
+
+        let currIndex = 0;
+
+        for (let i = 0; i < 8; i++) {
+          tiles[i].style.backgroundImage = `url('${firstImages[currIndex]}')`;
+          currIndex++;
+          tiles[i].firstElementChild.addEventListener("click", () => {
+            handleTileClick(i + 1);
+          });
+        }
+
+        currIndex = 0;
+
+        for (let i = 8; i < 16; i++) {
+          tiles[i].style.backgroundImage = `url('${secondImages[currIndex]}')`;
+          currIndex++;
+          tiles[i].firstElementChild.addEventListener("click", () => {
+            handleTileClick(i + 1);
+          });
+        }
+      }
+
+      reset();
+
+    </script>
+
+</body>
+
+</html>

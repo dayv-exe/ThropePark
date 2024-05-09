@@ -1,0 +1,25 @@
+<div class="review carousel-item">
+
+  <% if (noStars==1) { %>
+    <img id="review-img" src="../images/UI/1stars.png" alt="1 star rating">
+    <% } else if (noStars==2) { %>
+      <img id="review-img" src="../images/UI/2stars.png" alt="2-star rating">
+      <% } else if (noStars==3) { %>
+        <img id="review-img" src="../images/UI/3stars.png" alt="3-star rating">
+        <% } else if (noStars==4) { %>
+          <img id="review-img" src="../images/UI/4stars.png" alt="4-star rating">
+          <% } else if (noStars==5) { %>
+            <img id="review-img" src="../images/UI/5stars.png" alt="5-star rating">
+            <% } %>
+
+              <p>
+                "<%= reviewComment %>"
+              </p>
+              <p>
+                - <%= reviewer %>
+              </p>
+</div>
+
+<script>
+
+</script>

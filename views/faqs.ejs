@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles/style.css">
+  <title><%= title %></title>
+</head>
+<body>
+  <%- include('./particles/PageHeader.ejs', {title: title}) %>
+  <main class="center-column">
+    <h2 class="div-title">Answers to common questions</h2>
+
+    <div class="page-padding center-column div-top-gap">
+      <%- include('./particles/Faq.ejs', {question: "Can I bring my dog?", answer: "No. Unfortunately wild animals are not allowed in the park as there are kids present and the animal could assult the children."}) %>
+
+      <%- include('./particles/Faq.ejs', {question: "Can I bring my dog?", answer: "No. Unfortunately wild animals are not allowed in the park as there are kids present and the animal could assult the children."}) %>
+    </div>
+  </main>
+</body>
+</html>
