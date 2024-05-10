@@ -1,47 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../styles/style.css">
-  <title><%= title %></title>
+  <title>
+    <%= title %>
+  </title>
 </head>
+
 <body>
   <%- include('./particles/NestedPageHeader.ejs', {title: title}) %>
-  <div class="center-column">
-    
-    <%- include('./particles/LineOfInfo.ejs', {infoText: "This event has concluded!"}) %>
+    <div class="center-column">
 
-    <div class="page-padding">
-      <div class="event selected-event">
+      <div id="concluded" class="info-line-warn center-column info-line">
+        <p>This event has concluded!</p>
+      </div>
 
-        <div class="top">
-          <div id="name-date" class="left-center-column">
-             <p>Event Date: 2024-09-11</p>
-          </div>
-      
-          <div id="tags" class="center-row">
-            <p>tags: </p>
-            <div class="tag">
-              <p>a tag</p>
+      <div class="page-padding">
+        <div class="event selected-event">
+
+          <div class="top">
+            <div class="left-center-column">
+              <p id="date"></p>
+            </div>
+
+            <div id="tags" class="center-row">
+              <p>Category: </p>
+              <div class="tag">
+                <p id="category"></p>
+              </div>
             </div>
           </div>
-        </div>
-      
-        <div class="bottom">
-      
-          <p class="div-paragraph">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint ea iure laudantium eos a, est earum inventore excepturi placeat quis eius quidem ratione reiciendis delectus culpa porro quisquam praesentium similique sit pariatur molestias saepe nobis aperiam? Nostrum pariatur facilis repudiandae harum explicabo, nihil dolorum corporis incidunt ipsum quis quia? Doloremque.</p>
 
-          <div id="event-socials" class="left-center-row">
-            <p>Views: 420</p>
-            <p>Interested: 69</p>
+          <div class="bottom">
+
+            <p id="description" class="div-paragraph"></p>
+
+            <div id="event-socials" class="left-center-row">
+              <p id="area"></p>
+              <p id="views"></p>
+              <p id="interested"></p>
+            </div>
           </div>
 
-          <a href="/" class="dark-button">I'm In!</a>
         </div>
-      
       </div>
     </div>
-  </div>
+
+    <script src="../requester.js"></script>
+
+    <script>
+      let eventViews;
+      let eventInterest;
+      let eventId;
+
+      function showEvent(event) {
+        getFromDB(`select * from event_categories where event_category_id = ${event.event_category_id}`, showEventCategory, noEvent, errorGettingEvent);
+
+        getFromDB(`select area_name from areas where area_id = ${event.area_id}`, showAreaName, doNothing, errorGettingEvent);
+
+        function showEventCategory(event_category) {
+          document.getElementById("category").innerHTML = event_category.event_category_name
+        }
+
+        function showAreaName(area){
+          document.getElementById("area").innerHTML = `Park area: ${area.area_name}`;
+        }
+
+        document.getElementById("date").innerHTML = event.event_date;
+        document.getElementById("description").innerHTML = event.event_description;
+        document.getElementById("views").innerHTML = `Views: ${event.event_views}`;
+        document.getElementById("interested").innerHTML = `Interests: ${event.event_interest}`;
+
+        eventViews = event.event_views;
+        eventInterest = event.event_interest;
+        eventId = event.event_id;
+
+        if (event.event_concluded) {
+          document.getElementById("concluded").style.display = "flex";
+          document.getElementById("views").innerHTML = `Viewed by ${eventViews} people`;
+          document.getElementById("interested").innerHTML = `${eventInterest} people where interested`;
+        } else {
+          document.getElementById("concluded").style.display = "none";
+        }
+
+        updateViews();
+      }
+
+      getFromDB(`select event_id, area_id, event_category_id, event_name, event_description, event_date, event_year, event_interest, event_views, julianday(Date('now')) > julianday(event_date) as event_concluded from events where event_name = ?`, showEvent, noEvent, errorGettingEvent, [document.title]);
+
+      function noEvent() {
+        window.alert("Event not found :(");
+      }
+
+      function errorGettingEvent(error) {
+        window.alert(error);
+      }
+
+      function doNothing(){
+
+      }
+
+      function updateViews() {
+        sendToDB(`UPDATE events set event_views = ? WHERE event_id = ?`, [
+          eventViews + 1, 
+          eventId
+        ], doNothing, doNothing);
+      }
+    </script>
+
 </body>
+
 </html>

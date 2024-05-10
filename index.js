@@ -68,7 +68,7 @@ app.post("/sendData", (req, res) => {
 });
 
 app.post('/getData', (req, res) => {
-  db.all(req.body.sql, [], (err, rows) => {
+  db.all(req.body.sql, req.body.params, (err, rows) => {
       if (err) {
           console.error('Error retrieving data:', err);
           res.status(500).json({ error: 'Error retrieving data' });

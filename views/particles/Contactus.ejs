@@ -1,20 +1,56 @@
-<div id="contact-wrapper">
-  <h2 class="div-title"><%= title %></h2>
-  <form id="contact-form" action="/">
+<div class="contact-wrapper">
+  <h2 class="div-title">
+    <%= title %>
+  </h2>
+  <form id="contact-form">
     <div id="name-wrapper" class="left-center-column">
-      <label id="name-label" for="name">Full Name:</label>
-      <input class="custom-textbox" type="text" name="name" id="name" placeholder="e.g. John Appleseed">
+      <label id="name-label" for="contact-name">Full Name:</label>
+      <input class="custom-textbox contact-name" type="text" name="contact-name" id="contact-name"
+        placeholder="e.g. John Appleseed">
     </div>
     <div id="email-wrapper" class="left-center-column">
-      <label id="email-label" for="email">Email:</label>
-      <input class="custom-textbox" type="email" name="email" id="email" placeholder="e.g. john@thrilled.fun">
+      <label id="email-label" for="contact-email">Email:</label>
+      <input class="custom-textbox contact-email" type="email" name="contact-email" id="contact-email"
+        placeholder="e.g. john@thrilled.fun">
     </div>
     <div id="message-wrapper" class="left-center-column">
-      <label id="message-label" for="message"><%= messageLabelText %></label>
-      <textarea class="custom-textbox" name="message" id="message" placeholder="Say something..."></textarea>
+      <label id="message-label" for="contact-message">
+        <%= messageLabelText %>
+      </label>
+      <textarea class="custom-textbox contact-message" name="contact-message" id="contact-message"
+        placeholder="Say something..."></textarea>
     </div>
+
     <div id="button-wrapper" class="center-column">
-      <input class="dark-button" id="submit-form" type="submit" value=<%= submitButtonText %>>
+      <input class="dark-button" id="submit-contact-form" type="submit" value="Send">
     </div>
   </form>
 </div>
+
+<script src="./requester.js"></script>
+<script>
+  const form = document.getElementById("contact-form");
+  const fullname = document.getElementById("contact-name");
+  const email = document.getElementById("contact-email");
+  const message = document.getElementById("contact-message");
+  form.addEventListener("submit", e => { handleSubmit(e) });
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    if (fullname.value.length < 2) {
+      window.alert("Please enter a valid full name!");
+      return;
+    } else if (email.value.length < 5) {
+      window.alert("Please enter a valid email");
+      return;
+    } else if (message.value.length < 3) {
+      window.alert("Please enter a valid message!");
+      return;
+    }
+
+    sendToDB("INSERT INTO contacts(contact_message, contact_fullname, contact_email) VALUES (?,?,?)", [message.value, fullname.value, email.value], () => window.alert("Thank you for leaving us a message. We will get back to you shortly!"), () => window.alert("Failed to send message try again :("));
+
+    location.reload();
+  }
+</script>

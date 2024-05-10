@@ -17,13 +17,11 @@
     </div>
 
     <div class="header-content page-padding">
-      <!-- NAVBAR -->
       <%- include('./particles/Navbar.ejs') %>
-        <!-- ---------------------------------- -->
 
         <div class="left m-center-column">
           <h1 id="site-title">Welcome to <br> <span>Thrope Park</span></h1>
-          <a id="site-cab" class="action-btn-light image-button" href="/">Start exploring</a>
+          <a id="site-cab" class="action-btn-light image-button" href="/areas">Start exploring</a>
 
           <div id="timing-box" class="abs center-column">
             <h2>Opening Times</h2>
@@ -36,9 +34,7 @@
   </header>
 
   <main class="center-column">
-    <!-- REVIEWS -->
     <%- include('./particles/Reviews.ejs') %>
-      <!-- ---------------------------------- -->
 
       <div class="page-padding div-top-gap center-column">
         <%- include('./particles/ImgTextButtonDiv.ejs', { imgAlign: "right" , title: "We know you'll love Thrope Park!"
@@ -78,7 +74,7 @@
         </div>
       </div>
 
-      <%- include('./particles/Contactus.ejs', {title: "Contact Us", messageLabelText: "Message:", submitButtonText: "Send"}) %>
+      <%- include('./particles/Contactus.ejs', {title: "Contact Us", messageLabelText: "Message:", isFaq: false}) %>
 
   </main>
 </body>

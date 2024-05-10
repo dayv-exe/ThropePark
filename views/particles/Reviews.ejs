@@ -1,16 +1,30 @@
 <div id="reviews-wrapper">
   <h2 class="div-title">Reviews</h2>
   <div id="reviews" class="carousel">
-
-    <%- include('./Review.ejs', {noStars: 2, reviewComment: "Would this work?", reviewer: "Johnny Test"}) %>
-
-    <%- include('./Review.ejs', {noStars: 5, reviewComment: "Would this work?", reviewer: "Johnny Test"}) %>
-
-    <%- include('./Review.ejs', {noStars: 4, reviewComment: "Would this work?", reviewer: "Johnny Test"}) %>
-
-    <%- include('./Review.ejs', {noStars: 1, reviewComment: "", reviewer: "Johnny Test"}) %>
-
-    <%- include('./Review.ejs', {noStars: 2, reviewComment: "Would this work?", reviewer: "Johnny Test"}) %>
-
   </div>
 </div>
+
+<script src="../requester.js"></script>
+<script>
+  function showReviews(review) {
+    show(`
+      <img src="../images/UI/${review.review_stars}stars.png" alt="${review.review_stars} star rating">
+      <p>"${review.review_comment}"</p>
+      <p>-${review.review_fullname}</p>
+    `, document.getElementById("reviews"), ["review", "carousel-item"]);
+  }
+
+  function showNoReviews() {
+    show(`
+          <p>No reviews yet :(</p>
+        `, document.getElementById("reviews"));
+  }
+
+  function errorGettingReviews(error) {
+    show(`
+      <p>Failed to get reviews. ${error}</p>
+    `, document.getElementById("reviews"));
+  }
+
+  getFromDB("select * from reviews", showReviews, showNoReviews, errorGettingReviews);
+</script>

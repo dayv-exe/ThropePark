@@ -17,108 +17,116 @@
       <p class="card-paragraph">Add stuff to db through here</p>
       <div class="page-padding center-column">
         <div class="add-areas">
-          <form id="create-area-form" class="left-center-column">
+          <form id="create-area-form" class="left-center-column create-form">
             <h2 class="div-title">Add Area</h2>
-            <label for="image_name">the name and extension(not path!) of an image inside the './images/rides'
-              directory:</label>
-            <input type="text" name="image_name" id="image_name">
+
+            <label for="area_image_name">Image File Name:</label>
+            <input type="text" name="area_image_name" id="area_image_name">
 
             <label for="area_name">Area Name:</label>
             <input type="text" name="area_name" id="area_name">
 
-            <label for="area_decription">Area description:</label>
+            <label for="area_description">Area description:</label>
             <textarea name="area_description" id="area_description"></textarea>
 
-            <input type="submit" value="upload"">
+            <input type="submit" value="upload">
           </form>
         </div>
 
-        <div class="add-areas">
-          <form id="create-area-form" class="left-center-column">
+        <div class="add-rides">
+          <form id="create-ride-form" class="left-center-column create-form">
             <h2 class="div-title">Add Rides</h2>
-            <label for="image_name">the name and extension(not path!) of an image inside the './images/rides'
-              directory:</label>
-            <input type="text" name="image_name" id="image_name">
+            <label for="ride_image_name">Image File Name:</label>
+            <input type="text" name="ride_image_name" id="ride_image_name">
 
-            <label for="area_name">Area Name:</label>
-            <input type="text" name="area_name" id="area_name">
+            <label>Select what area ride will be located:</label>
+            <div id="ride-area-select-wrapper">
 
-            <label for="area_decription">Area description:</label>
-            <textarea name="area_description" id="area_description"></textarea>
+            </div>
 
-            <input type="submit" value="upload"">
+            <label for="ride_name">Ride Name:</label>
+            <input type="text" name="ride_name" id="ride_name">
+
+            <label for="ride_description">Ride description:</label>
+            <textarea name="ride_description" id="ride_description"></textarea>
+
+            <input type="submit" value="upload">
           </form>
         </div>
 
-        <div class="add-areas">
-          <form id="create-area-form" class="left-center-column">
-            <h2 class="div-title">Add Review</h2>
-            <label for="image_name">the name and extension(not path!) of an image inside the './images/rides'
-              directory:</label>
-            <input type="text" name="image_name" id="image_name">
+        <div class="add-review">
+          <form id="create-review-form" class="left-center-column create-form">
+            <h2 class="div-title">Add Reviews</h2>
+            <label for="review-stars">Enter number of stars FROM: 1 to 5:</label>
+            <input type="number" max="5" min="1" name="review-stars" id="review-stars">
 
-            <label for="area_name">Area Name:</label>
-            <input type="text" name="area_name" id="area_name">
+            <label for="review-name">Reviewer Name:</label>
+            <input type="text" name="review-name" id="review-name">
 
-            <label for="area_decription">Area description:</label>
-            <textarea name="area_description" id="area_description"></textarea>
+            <label for="review-comments">Review Comment:</label>
+            <textarea name="review-comments" id="review-comments"></textarea>
 
-            <input type="submit" value="upload"">
+            <input type="submit" value="upload">
           </form>
         </div>
 
-        <div class="add-areas">
-          <form id="create-area-form" class="left-center-column">
+        <div class="add-event-category">
+          <form id="create-event-category-form" class="left-center-column create-form">
             <h2 class="div-title">Add Event Category</h2>
-            <label for="image_name">the name and extension(not path!) of an image inside the './images/rides'
-              directory:</label>
-            <input type="text" name="image_name" id="image_name">
+            
+            <label for="event-category-name">event category Name:</label>
+            <input type="text" name="event-category-name" id="event-category-name">
 
-            <label for="area_name">Area Name:</label>
-            <input type="text" name="area_name" id="area_name">
-
-            <label for="area_decription">Area description:</label>
-            <textarea name="area_description" id="area_description"></textarea>
-
-            <input type="submit" value="upload"">
+            <input type="submit" value="upload">
           </form>
         </div>
 
-        <div class="add-areas">
-          <form id="create-area-form" class="left-center-column">
-            <h2 class="div-title">Add Event</h2>
-            <label for="image_name">the name and extension(not path!) of an image inside the './images/rides'
-              directory:</label>
-            <input type="text" name="image_name" id="image_name">
+        <div class="add-event">
+          <form id="create-event-form" class="left-center-column create-form">
+            <h2 class="div-title">Add event</h2>
+            <label for="event-name">Event Name:</label>
+            <input type="text" name="event-name" id="event-name">
 
-            <label for="area_name">Area Name:</label>
-            <input type="text" name="area_name" id="area_name">
+            <label for="event-description">Event Description:</label>
+            <input type="text" name="event-description" id="event-description">
 
-            <label for="area_decription">Area description:</label>
-            <textarea name="area_description" id="area_description"></textarea>
+            <label>Event category:</label>
+            <div id="event-category-select-wrapper">
 
-            <input type="submit" value="upload"">
+            </div>
+
+            <label>Event area:</label>
+            <div id="event-area-select-wrapper">
+
+            </div>
+
+            <label for="event-date">Event Date:</label>
+            <input type="date" name="event-date" id="event-date">
+
+            <input type="submit" value="upload">
           </form>
         </div>
+
       </div>
     </main>
 
   <script src="./requester.js"></script>
 
   <script>
+    // #region AREAS
     const areaForm = document.getElementById("create-area-form"); 
-    function handleSubmit(e){
+    function handleAreaSubmit(e){
       e.preventDefault();
 
-      const imageName = document.getElementById("image_name");
+      const areaImageName = document.getElementById("area_image_name");
       const areaName = document.getElementById("area_name");
       const areaDescription = document.getElementById("area_description");
 
       const minDescrpLen = 30;
 
-      if (imageName.value.length < 5) {
+      if (areaImageName.value.length < 5) {
         window.alert("A VALID image name is required!");
-        imageName.focus()
+        areaImageName.focus()
         return;
       } else if (areaName.value.length < 3){
         window.alert("A longer area name of 3 characters or more is required!");
@@ -130,26 +138,236 @@
         return;
       }
 
-      sendToDB("INSERT INTO areas(image_name, area_name, area_description, area_visitors) VALUES (?,?,?,?)", [imageName.value, areaName.value, areaDescription.value, 0], showSuccess, errorSendingArea);
+      sendToDB("INSERT INTO areas(image_name, area_name, area_description, area_visitors) VALUES (?,?,?,?)", [areaImageName.value, areaName.value, areaDescription.value, 0], () => window.alert("Added to database successfully! Please refresh page"), () => window.alert("Failed to add to the database!"));
+      // location.reload();
     }
-    areaForm.addEventListener("submit", e => {handleSubmit(e)});
-    
-      function showSuccess(data) {
-        showOnTop(`
-          <div class="info-line-success center-column info-line">
-            <p>Successfully uploaded area to database</p>
-          </div> 
-        `, document.body);
+    areaForm.addEventListener("submit", e => {handleAreaSubmit(e)});
+    // #endregion
+
+    // #region RIDES
+    const rideForm = document.getElementById("create-ride-form"); 
+    const rideAreaSelectWrapper = document.getElementById("ride-area-select-wrapper");
+
+    createListOfAreas_rides();
+
+    function createListOfAreas_rides(){
+      const rideAreaSelect = document.createElement("select");
+      rideAreaSelect.id = "ride-area-select";
+
+      function addArea(area){
+        const opt = document.createElement("option");
+        opt.value = area.area_id;
+        opt.innerHTML = area.area_name;
+
+        rideAreaSelect.add(opt);
       }
 
-      function errorSendingArea(error) {
-        show(`
-          <div class="info-line-success center-column info-line">
-            <p>Failed to uploaded area to database. ${error}</p>
-          </div> 
-        `, document.body);
+      rideAreaSelectWrapper.append(rideAreaSelect);
+
+      function noArea(area){
+
       }
 
+      getFromDB("SELECT area_id, area_name FROM areas", addArea, noArea, () => window.alert("Error loading areas for ride creation!"));
+    }
+
+    function handleRideSubmit(e){
+      e.preventDefault();
+
+      const rideImageName = document.getElementById("ride_image_name");
+      const rideName = document.getElementById("ride_name");
+      const rideDescription = document.getElementById("ride_description");
+      const rideAreaSelect = document.getElementById("ride-area-select");
+
+      const minDescrpLen = 30;
+
+      if (rideImageName.value.length < 5) {
+        window.alert("A VALID image name is required!");
+        rideImageName.focus()
+        return;
+      } else if (rideName.value.length < 3){
+        window.alert("A longer ride name of 3 characters or more is required!");
+        rideName.focus()
+        return;
+      } else if (rideDescription.value.split(" ").length < minDescrpLen){
+        window.alert(`A description of ${minDescrpLen} words or more is required for the ${rideName.value}!`);
+        rideName.focus()
+        return;
+      } else if (!rideAreaSelect.value){
+        window.alert(`Please select an area where ride will be located!`);
+        rideAreaSelect.focus()
+        return;
+      }
+
+      sendToDB("INSERT INTO rides(image_name, area_id, ride_name, ride_description, ride_pukes) VALUES (?,?,?,?,?)", [rideImageName.value,rideAreaSelect.value , rideName.value, rideDescription.value, 0], () => window.alert("Added to database successfully! Please refresh page"), () => window.alert("Failed to add to the database!"));
+      //location.reload();
+    }
+    rideForm.addEventListener("submit", e => {handleRideSubmit(e)});
+    // #endregion
+  
+    // #region REVIEWS
+    const reviewForm = document.getElementById("create-review-form"); 
+
+    function handleReviewSubmit(e){
+      e.preventDefault();
+
+      const reviewName = document.getElementById("review-name");
+      const reviewComments = document.getElementById("review-comments");
+      const reviewStars = document.getElementById("review-stars");
+
+      if (reviewName.value.length < 2){
+        window.alert("A longer reviewer name of 3 characters or more is required!");
+        reviewName.focus()
+        return;
+      } else if (reviewComments.value.length < 3){
+        window.alert(`A longer is comment required!`);
+        reviewComments.focus()
+        return;
+      } else if (!reviewStars.value){
+        window.alert(`Please select a number from 1 to 5!`);
+        reviewStars.focus()
+        return;
+      }
+
+      sendToDB("INSERT INTO reviews(review_fullname, review_comment, review_stars) VALUES (?,?,?)", [
+        reviewName.value,
+        reviewComments.value,
+        reviewStars.value
+      ], () => window.alert("Added to database successfully! Please refresh page"), () => window.alert("Failed to add to the database!"));
+      // location.reload();
+    }
+    reviewForm.addEventListener("submit", e => {handleReviewSubmit(e)});
+    // #endregion
+
+    // #region Event categories
+    const eventCategoryForm = document.getElementById("create-event-category-form"); 
+
+    function handleEventCategorySubmit(e){
+      e.preventDefault();
+
+      const eventCategoryName = document.getElementById("event-category-name");
+      
+      if (eventCategoryName.value.length < 2){
+        window.alert("A longer event category name of 3 characters or more is required!");
+        eventCategoryName.focus()
+        return;
+      }
+
+      sendToDB("INSERT INTO event_categories(event_category_name) VALUES (?)", [
+        eventCategoryName.value,
+      ], () => window.alert("Added to database successfully! Please refresh page"), () => window.alert("Failed to add to the database!"));
+      // location.reload();
+    }
+    eventCategoryForm.addEventListener("submit", e => {handleEventCategorySubmit(e)});
+    // #endregion
+  
+    // #region EVENTS
+    const eventForm = document.getElementById("create-event-form"); 
+    const eventCategorySelectWrapper = document.getElementById("event-category-select-wrapper");
+    const eventAreaSelectWrapper = document.getElementById("event-area-select-wrapper")
+
+    createListOfEventCategories();
+
+    function createListOfEventCategories(){
+      const eventCategorySelect = document.createElement("select");
+      eventCategorySelect.id = "event-category-select";
+
+      function addEventCategory(category){
+        const opt = document.createElement("option");
+        opt.value = category.event_category_id;
+        opt.innerHTML = category.event_category_name;
+
+        eventCategorySelect.add(opt);
+      }
+
+      eventCategorySelectWrapper.append(eventCategorySelect);
+
+      function noCategory(category){
+
+      }
+
+      getFromDB("SELECT * FROM event_categories", addEventCategory, noCategory, () => window.alert("Error loading event categories for event creation!"));
+    }
+
+    createListOfAreas();
+
+    function createListOfAreas(){
+      const eventAreaSelect = document.createElement("select");
+      eventAreaSelect.id = "event-area-select";
+
+      function addArea(area){
+        const opt = document.createElement("option");
+        opt.value = area.area_id;
+        opt.innerHTML = area.area_name;
+
+        eventAreaSelect.add(opt);
+      }
+
+      eventAreaSelectWrapper.append(eventAreaSelect);
+
+      function noArea(area){
+
+      }
+
+      getFromDB("SELECT area_id, area_name FROM areas", addArea, noArea, () => window.alert("Error loading areas for ride creation!"));
+    }
+
+    function handleEventSubmit(e){
+      e.preventDefault();
+
+      const eventName = document.getElementById("event-name");
+      const eventDescription = document.getElementById("event-description");
+      const eventCategorySelect = document.getElementById("event-category-select");
+      const eventAreaSelect = document.getElementById("event-area-select");
+      const eventDate = document.getElementById("event-date");
+
+      let chosenDate;
+
+      const minDescrpLen = 30;
+
+      if (!eventDate.value) {
+        window.alert("A VALID date is required!");
+        eventDate.focus()
+        return;
+      } else if (eventName.value.length < 3){
+        window.alert("A longer name of 3 characters or more is required!");
+        eventName.focus()
+        return;
+      } else if (eventDescription.value.split(" ").length < minDescrpLen){
+        window.alert(`A description of ${minDescrpLen} words or more is required!`);
+        eventDescription.focus()
+        return;
+      } else if (!eventCategorySelect.value){
+        window.alert(`Please select an event category!`);
+        eventCategorySelect.focus()
+        return;
+      } else if (!eventAreaSelect.value){
+        window.alert(`Please select an area where this event will take place!`);
+        eventAreaSelect.focus()
+        return;
+      }
+
+      chosenDate = new Date(eventDate.value);
+
+      const day = chosenDate.getDate() < 10 ? "0" + chosenDate.getDate() : chosenDate.getDate();
+      const month = (chosenDate.getMonth() + 1) < 10 ? "0" + (chosenDate.getMonth() + 1).toString() : (chosenDate.getMonth() + 1).toString();
+      const year = chosenDate.getFullYear();
+      const fDate = `${year}-${month}-${day}`;
+
+      sendToDB("INSERT INTO events(area_id, event_category_id, event_name, event_description, event_date, event_year, event_interest, event_views) VALUES (?,?,?,?,?,?,?,?)", [
+        eventAreaSelect.value,
+        eventCategorySelect.value,
+        eventName.value,
+        eventDescription.value,
+        fDate,
+        chosenDate.getFullYear(),
+        Math.floor(Math.random() * 901) + 100,
+        Math.floor(Math.random() * 901) + 100
+      ], () => window.alert("Added to database successfully! Please refresh page"), () => window.alert("Failed to add to the database!"));
+      //location.reload();
+    }
+    eventForm.addEventListener("submit", e => {handleEventSubmit(e)});
+    // #endregion
 
   </script>
 

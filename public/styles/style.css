@@ -248,6 +248,19 @@ main {
   width: fit-content;
 }
 
+.no-border{
+  border: none !important;
+}
+
+.create-form{
+  width: 100%;
+}
+
+.serious-warning-text{
+  color: red;
+  background-color: black;
+}
+
 .info-line {
   width: 100%;
   padding: 1rem;
@@ -652,14 +665,14 @@ main {
 
 /* #region CONTACT US */
 
-#contact-wrapper {
+.contact-wrapper {
   width: 100%;
-  margin-bottom: 10rem;
+  margin-bottom: 3rem;
 }
-#contact-wrapper > h2 {
+.contact-wrapper > h2 {
   margin-bottom: 2rem;
 }
-#contact-form {
+#contact-form, #faq-form {
   border: 0.15rem solid var(--input-field-bg-color);
   border-radius: 1rem;
   padding: 2rem 3rem;
@@ -688,52 +701,52 @@ form{
   max-width: 1000px;
 }
 
-#name-wrapper,
-#email-wrapper,
-#message-wrapper,
-#button-wrapper {
+.name-wrapper,
+.email-wrapper,
+.message-wrapper,
+.button-wrapper {
   width: 100%;
 }
 
-#message {
+.contact-message {
   height: 80%;
   resize: none;
 }
 
-#message,
-#name,
-#email {
+.contact-message,
+.contact-name,
+.contact-email {
   width: 100%;
   background-color: var(--input-field-bg-color);
   border-radius: 0.75rem;
 }
-#message-label,
-#email-label,
-#name-label {
+.message-label,
+.email-label,
+.name-label {
   margin-bottom: 0.35rem;
 }
 
-#name-wrapper {
+.name-wrapper {
   grid-area: name;
 }
-#email-wrapper {
+.email-wrapper {
   grid-area: email;
 }
-#message-wrapper {
+.message-wrapper {
   grid-area: message;
 }
 #button-wrapper {
   grid-area: button;
 }
-#name-wrapper,
-#email-wrapper,
-#message-wrapper {
+.name-wrapper,
+.email-wrapper,
+.message-wrapper {
   height: 100%;
 }
 
 /* #region RESPONSIVE */
 @media screen and (max-width: 885px) {
-  #contact-form {
+  #contact-form, #faq-form {
     gap: 1rem;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 3fr 1fr;
@@ -781,7 +794,7 @@ form{
 
   background-color: var(--card-bg-color);
   border-radius: 1.75rem;
-  /* box-shadow: var(--box-shadow-default); */
+  box-shadow: var(--box-shadow-default);
 }
 .card > img {
   border-top-left-radius: 1.75rem;
@@ -821,6 +834,8 @@ form{
 
 /* #region FAQs */
 .faq {
+  width: 100%;
+  max-width: 1000px;
   border-top: 0.15rem solid rgba(0, 0, 0, 0.2);
   padding: 2rem;
 }
@@ -844,7 +859,7 @@ form{
   justify-content: space-between;
   align-items: flex-end;
 }
-.event #name-date > p {
+.event .name-date > p {
   opacity: 50%;
 }
 #event-socials > p {
@@ -878,7 +893,7 @@ form{
     align-items: flex-start;
   }
 
-  .event #name-date > p {
+  .event .name-date > p {
     margin-bottom: 1rem;
   }
 }

@@ -1,0 +1,56 @@
+<div class="contact-wrapper">
+  <h2 class="div-title">
+    <%= title %>
+  </h2>
+  <form id="faq-form">
+    <div class="left-center-column name-wrapper">
+      <label class="name-label" for="faq-name">Full Name:</label>
+      <input class="custom-textbox contact-name" type="text" name="faq-name" id="faq-name"
+        placeholder="e.g. John Appleseed">
+    </div>
+    <div class="left-center-column email-wrapper">
+      <label class="email-label" for="faq-email">Email:</label>
+      <input class="custom-textbox contact-email" type="email" name="faq-email" id="faq-email"
+        placeholder="e.g. john@thrilled.fun">
+    </div>
+    <div class="left-center-column message-wrapper">
+      <label class="message-label" for="faq-message">
+        <%= messageLabelText %>
+      </label>
+      <textarea class="custom-textbox contact-message" name="faq-message" id="faq-message"
+        placeholder="Ask something..."></textarea>
+    </div>
+
+    <div class="center-column button-wrapper">
+      <input class="dark-button" id="submit-faq-form" type="submit" value="Send">
+    </div>
+  </form>
+</div>
+
+<script src="./requester.js"></script>
+<script>
+  const faqForm = document.getElementById("faq-form");
+  const faqFullname = document.getElementById("faq-name");
+  const faqEmail = document.getElementById("faq-email");
+  const faqMessage = document.getElementById("faq-message");
+  faqForm.addEventListener("submit", e => { handleSubmit(e) });
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    if (faqFullname.value.length < 2) {
+      window.alert("Please enter a valid full name!");
+      return;
+    } else if (faqEmail.value.length < 5) {
+      window.alert("Please enter a valid email");
+      return;
+    } else if (faqMessage.value.length < 3) {
+      window.alert("Please enter a valid message!");
+      return;
+    }
+
+    sendToDB("INSERT INTO faqs(faq_question, faq_fullname, faq_email) VALUES (?,?,?)", [faqMessage.value, faqFullname.value, faqEmail.value], () => window.alert("Thank you for your question, we will answer shortly!"), () => window.alert("Failed to ask question try again :("));
+
+    location.reload();
+  }
+</script>

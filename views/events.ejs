@@ -17,27 +17,117 @@
         <div id="upcoming-events-wrapper">
           <h2 class="div-title">Upcoming Events</h2>
 
-          <div class="events div-top-gap">
+          <div id="ev-wrapper" class="events div-top-gap">
 
-            <%- include('./particles/Event.ejs', {title: "Summer Jam 2024", date: "2024-09-11", tags: ["Dance", "Festival"], description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste aperiam laudantium rem pariatur magni voluptas voluptatibus fugit, voluptatem quibusdam fuga quidem illo reiciendis. Esse veritatis at iusto maiores voluptatum, placeat illo aperiam numquam autem similique sapiente facere fugit, fuga provident? Ipsum debitis blanditiis consectetur necessitatibus quas vitae eos fugit doloremque!"}) %>
-
-            <%- include('./particles/Event.ejs', {title: "New York Airshow", date: "2024-09-11", tags: ["Fireworks", "Demolition"], description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste aperiam laudantium rem pariatur magni voluptas voluptatibus fugit, voluptatem quibusdam fuga quidem illo reiciendis. Esse veritatis at iusto maiores voluptatum, placeat illo aperiam numquam autem similique sapiente facere fugit, fuga provident? Ipsum debitis blanditiis consectetur necessitatibus quas vitae eos fugit doloremque!"}) %>
           </div>
         </div>
 
         <div id="concluded-events-wrapper" class="div-top-gap">
           <h2 class="div-title">Concluded Events</h2>
 
-          <div class="events div-top-gap">
+          <div id="ev-wrapper-concluded" class="events div-top-gap">
 
-            <%- include('./particles/Event.ejs', {title: "Summer Jam 2024", date: "2024-09-11", tags: ["Dance", "Festival"], description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste aperiam laudantium rem pariatur magni voluptas voluptatibus fugit, voluptatem quibusdam fuga quidem illo reiciendis. Esse veritatis at iusto maiores voluptatum, placeat illo aperiam numquam autem similique sapiente facere fugit, fuga provident? Ipsum debitis blanditiis consectetur necessitatibus quas vitae eos fugit doloremque!"}) %>
-
-            <%- include('./particles/Event.ejs', {title: "Summer Jam 2024", date: "2024-09-11", tags: ["Dance", "Festival"], description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste aperiam laudantium rem pariatur magni voluptas voluptatibus fugit, voluptatem quibusdam fuga quidem illo reiciendis. Esse veritatis at iusto maiores voluptatum, placeat illo aperiam numquam autem similique sapiente facere fugit, fuga provident? Ipsum debitis blanditiis consectetur necessitatibus quas vitae eos fugit doloremque!"}) %>
           </div>
         </div>
 
       </div>
     </main>
+
+    <script src="./requester.js"></script>
+    <script>
+      function showEvents(event) {
+        function showEventCategories(event_category) {
+          show(`
+            <p>${event_category.event_category_name}</p>
+          `, document.getElementById(`event-tag-${event.event_id}`), ["tag"]);
+        }
+
+
+        show(`
+          <div class="top">
+            <div class="left-center-column name-date">
+              <h2 class="card-title">${event.event_name}</h2>
+              <p>${event.event_date}</p>
+            </div>
+
+            <div id="event-tag-${event.event_id}" class="center-row tags">
+              <p>Category: </p>
+            </div>
+          </div>
+
+          <div class="bottom">
+
+            <p class="div-paragraph">${event.event_description}</p>
+
+            <a class="dark-button" href="events/${event.event_name}">View</a>
+
+          </div>
+      `, document.getElementById("upcoming-events-wrapper"), ["event"]);
+
+        getFromDB(`select * from event_categories where event_category_id = ${event.event_category_id}`, showEventCategories, showNoEvent, errorGettingEvents);
+      }
+
+      function showNoEvent() {
+        show(`
+          <p>No Events yet :(</p>
+        `, document.getElementById("upcoming-events-wrapper"));
+      }
+
+      function errorGettingEvents(error) {
+        show(`
+          <p>Failed to get Events. ${error}</p>
+        `, document.getElementById("upcoming-events-wrapper"));
+      }
+
+      getFromDB(`select * from events where julianday(event_date) >= julianday(Date('now'))`, showEvents, showNoEvent, errorGettingEvents);
+
+      function showPastEvents(event) {
+        function showEventCategories(event_category) {
+          show(`
+            <p>${event_category.event_category_name}</p>
+          `, document.getElementById(`event-tag-${event.event_id}`), ["tag"]);
+        }
+
+
+        show(`
+          <div class="top">
+            <div class="left-center-column name-date">
+              <h2 class="card-title">${event.event_name}</h2>
+              <p>${event.event_date}</p>
+            </div>
+
+            <div id="event-tag-${event.event_id}" class="center-row tags">
+              <p>Category: </p>
+            </div>
+          </div>
+
+          <div class="bottom">
+
+            <p class="div-paragraph">${event.event_description}</p>
+
+            <a class="dark-button" href="events/${event.event_name}">View</a>
+
+          </div>
+      `, document.getElementById("concluded-events-wrapper"), ["event"]);
+
+        getFromDB(`select * from event_categories where event_category_id = ${event.event_category_id}`, showEventCategories, showNoEvent, errorGettingEvents);
+      }
+
+      function showNoPastEvent() {
+        show(`
+          <p>No Events yet :(</p>
+        `, document.getElementById("concluded-events-wrapper"));
+      }
+
+      function errorGettingPastEvents(error) {
+        show(`
+          <p>Failed to get Events. ${error}</p>
+        `, document.getElementById("concluded-events-wrapper"));
+      }
+
+      getFromDB(`select * from events where julianday(event_date) < julianday(Date('now'))`, showPastEvents, showNoPastEvent, errorGettingPastEvents);
+    </script>
+
 </body>
 
 </html>

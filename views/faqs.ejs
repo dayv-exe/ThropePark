@@ -1,21 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles/style.css">
-  <title><%= title %></title>
+  <title>
+    <%= title %>
+  </title>
 </head>
+
 <body>
   <%- include('./particles/PageHeader.ejs', {title: title}) %>
-  <main class="center-column">
-    <h2 class="div-title">Answers to common questions</h2>
+    <main class="center-column">
+      <h2 class="div-title">Answers to common questions</h2>
+      <div id="faqs-wrapper" class="page-padding center-column div-top-gap">
+      </div>
+    </main>
 
-    <div class="page-padding center-column div-top-gap">
-      <%- include('./particles/Faq.ejs', {question: "Can I bring my dog?", answer: "No. Unfortunately wild animals are not allowed in the park as there are kids present and the animal could assult the children."}) %>
+    <script src="./requester.js"></script>
+    <script>
+      function showFaqs(faq) {
+        function showFaqAns(ans) {
+          show(`
+          <p class="card-paragraph">${ans.faq_answer}</p>
+          `, document.getElementById(`${faq.faq_id }-title-faq`).parentElement);
+        }
 
-      <%- include('./particles/Faq.ejs', {question: "Can I bring my dog?", answer: "No. Unfortunately wild animals are not allowed in the park as there are kids present and the animal could assult the children."}) %>
-    </div>
-  </main>
+        function errorGettingFaqAns(error) {
+          show(`
+          <p class="card-paragraph">Error getting answer ${error} :(</p>
+          `, document.getElementById(`${faq.faq_id}-title-faq`).parentElement);
+        }
+
+        function showNoFaqAns() {
+          show(`
+          <p class="card-paragraph">No answer yet :(</p>
+          <form id="answer-faq-form-${faq.faq_id}" class="left-center-column no-border">
+            <label for="the-answer-${faq.faq_id}">Answer:</label>
+            <textarea name="the-answer-${faq.faq_id}" id="the-answer-${faq.faq_id}" placeholder="e.g. No!"></textarea>
+            <input type="submit" value="answer">
+          </form>
+          `, document.getElementById(`${faq.faq_id}-title-faq`).parentElement, [
+            "left-center-column"
+          ]);
+
+          enableAns(faq.faq_id);
+        }
+
+        getFromDB(`SELECT * FROM faq_answers WHERE faq_id = ${faq.faq_id}`, showFaqAns, showNoFaqAns, errorGettingFaqAns);
+        show(`
+          <h3 id="${faq.faq_id}-title-faq" class="card-title">${faq.faq_question}</h3>
+        `, document.getElementById("faqs-wrapper"), ["faq", "left-center-column"]);
+      }
+
+      function showNoFaqsYet() {
+        show(`
+          <p>No FAQs yet :(</p>
+          `, document.getElementById("faqs-wrapper"), ["center-column"]);
+      }
+
+      function errorGettingFaqs(error) {
+        show(`
+          <p>Failed to get faqs. ${error}</p>
+          `, document.getElementById("faqs-wrapper"), ["center-column"]);
+      }
+
+      getFromDB("select * from faqs", showFaqs, showNoFaqsYet, errorGettingFaqs);
+
+      function enableAns(id) {
+        const ansForm = document.getElementById("answer-faq-form-" + id);
+        const ans = document.getElementById("the-answer-" + id);
+        ansForm.addEventListener("submit", e => { handleAnsSubmit(e) })
+        function handleAnsSubmit(e) {
+          e.preventDefault();
+
+          if (ans.value.length < 3) {
+            window.alert("Please enter a valid answer!");
+            return;
+          }
+
+          sendToDB("INSERT INTO faq_answers(faq_id, faq_answer) VALUES (?,?)", [
+            id,
+            ans.value
+          ], () => window.alert("Thank you for your answer!"), () => window.alert("Failed to answer question try again :("));
+        }
+      }
+    </script>
+
 </body>
+
 </html>

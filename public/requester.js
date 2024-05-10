@@ -1,10 +1,10 @@
-function getFromDB(sql, renderFunc, nothingToRenderFunc, errorRenderFunc) {
+function getFromDB(sql, renderFunc, nothingToRenderFunc, errorRenderFunc, params = []) {
   fetch('/getData', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ sql })
+    body: JSON.stringify({ sql, params })
   })
     .then(response => {
       if (!response.ok) {
@@ -19,6 +19,7 @@ function getFromDB(sql, renderFunc, nothingToRenderFunc, errorRenderFunc) {
         data.forEach(row => {
           renderFunc(row);
         });
+        return true;
       }
     })
     .catch(error => {
