@@ -1,12 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles/style.css">
-  <title><%= title %></title>
+  <title>
+    <%= title %>
+  </title>
 </head>
+
 <body>
-  <%- include('./particles/PageHeader.ejs', {title: title}) %>
+  <%- include('./particles/PageHeader.ejs', {title: "*create*" }) %>
+    <main class="center-column">
+      <h2 class="div-title">Backend section of the website</h2>
+      <p class="card-paragraph">Add stuff to db through here</p>
+      <div class="page-padding center-column">
+        <div class="add-areas">
+          <form id="create-area-form" class="left-center-column">
+            <h2 class="div-title">Add Area</h2>
+            <label for="image_name">the name and extension(not path!) of an image inside the './images/rides'
+              directory:</label>
+            <input type="text" name="image_name" id="image_name">
+
+            <label for="area_name">Area Name:</label>
+            <input type="text" name="area_name" id="area_name">
+
+            <label for="area_decription">Area description:</label>
+            <textarea name="area_description" id="area_description"></textarea>
+
+            <input type="submit" value="upload"">
+          </form>
+        </div>
+
+        <div class="add-areas">
+          <form id="create-area-form" class="left-center-column">
+            <h2 class="div-title">Add Rides</h2>
+            <label for="image_name">the name and extension(not path!) of an image inside the './images/rides'
+              directory:</label>
+            <input type="text" name="image_name" id="image_name">
+
+            <label for="area_name">Area Name:</label>
+            <input type="text" name="area_name" id="area_name">
+
+            <label for="area_decription">Area description:</label>
+            <textarea name="area_description" id="area_description"></textarea>
+
+            <input type="submit" value="upload"">
+          </form>
+        </div>
+
+        <div class="add-areas">
+          <form id="create-area-form" class="left-center-column">
+            <h2 class="div-title">Add Review</h2>
+            <label for="image_name">the name and extension(not path!) of an image inside the './images/rides'
+              directory:</label>
+            <input type="text" name="image_name" id="image_name">
+
+            <label for="area_name">Area Name:</label>
+            <input type="text" name="area_name" id="area_name">
+
+            <label for="area_decription">Area description:</label>
+            <textarea name="area_description" id="area_description"></textarea>
+
+            <input type="submit" value="upload"">
+          </form>
+        </div>
+
+        <div class="add-areas">
+          <form id="create-area-form" class="left-center-column">
+            <h2 class="div-title">Add Event Category</h2>
+            <label for="image_name">the name and extension(not path!) of an image inside the './images/rides'
+              directory:</label>
+            <input type="text" name="image_name" id="image_name">
+
+            <label for="area_name">Area Name:</label>
+            <input type="text" name="area_name" id="area_name">
+
+            <label for="area_decription">Area description:</label>
+            <textarea name="area_description" id="area_description"></textarea>
+
+            <input type="submit" value="upload"">
+          </form>
+        </div>
+
+        <div class="add-areas">
+          <form id="create-area-form" class="left-center-column">
+            <h2 class="div-title">Add Event</h2>
+            <label for="image_name">the name and extension(not path!) of an image inside the './images/rides'
+              directory:</label>
+            <input type="text" name="image_name" id="image_name">
+
+            <label for="area_name">Area Name:</label>
+            <input type="text" name="area_name" id="area_name">
+
+            <label for="area_decription">Area description:</label>
+            <textarea name="area_description" id="area_description"></textarea>
+
+            <input type="submit" value="upload"">
+          </form>
+        </div>
+      </div>
+    </main>
+
+  <script src="./requester.js"></script>
+
+  <script>
+    const areaForm = document.getElementById("create-area-form"); 
+    function handleSubmit(e){
+      e.preventDefault();
+
+      const imageName = document.getElementById("image_name");
+      const areaName = document.getElementById("area_name");
+      const areaDescription = document.getElementById("area_description");
+
+      const minDescrpLen = 30;
+
+      if (imageName.value.length < 5) {
+        window.alert("A VALID image name is required!");
+        imageName.focus()
+        return;
+      } else if (areaName.value.length < 3){
+        window.alert("A longer area name of 3 characters or more is required!");
+        areaName.focus()
+        return;
+      } else if (areaDescription.value.split(" ").length < minDescrpLen){
+        window.alert(`A description of ${minDescrpLen} words or more is required for the ${areaName.value}!`);
+        areaName.focus()
+        return;
+      }
+
+      sendToDB("INSERT INTO areas(image_name, area_name, area_description, area_visitors) VALUES (?,?,?,?)", [imageName.value, areaName.value, areaDescription.value, 0], showSuccess, errorSendingArea);
+    }
+    areaForm.addEventListener("submit", e => {handleSubmit(e)});
+    
+      function showSuccess(data) {
+        showOnTop(`
+          <div class="info-line-success center-column info-line">
+            <p>Successfully uploaded area to database</p>
+          </div> 
+        `, document.body);
+      }
+
+      function errorSendingArea(error) {
+        show(`
+          <div class="info-line-success center-column info-line">
+            <p>Failed to uploaded area to database. ${error}</p>
+          </div> 
+        `, document.body);
+      }
+
+
+  </script>
+
 </body>
+
 </html>

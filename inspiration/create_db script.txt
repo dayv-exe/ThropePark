@@ -1,0 +1,89 @@
+DROP TABLE IF EXISTS images;
+DROP TABLE IF EXISTS areas;
+DROP TABLE IF EXISTS rides;
+DROP TABLE IF EXISTS faqs;
+DROP TABLE IF EXISTS faq_answers;
+DROP TABLE IF EXISTS reviews;
+DROP TABLE IF EXISTS event_categories;
+DROP TABLE IF EXISTS events;
+DROP TABLE IF EXISTS contacts;
+
+CREATE TABLE areas (
+  area_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  image_name TEXT NOT NULL,
+  area_name TEXT NOT NULL UNIQUE,
+  area_description TEXT NOT NULL,
+  area_visitors INTEGER NOT NULL
+);
+
+CREATE TABLE rides (
+  ride_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  area_id INTEGER NOT NULL,
+  image_name TEXT NOT NULL,
+  ride_name TEXT NOT NULL UNIQUE,
+  ride_description TEXT NOT NULL,
+  ride_pukes INTEGER NOT NULL,
+
+  CONSTRAINT area_id_fk
+    FOREIGN KEY (area_id)
+      REFERENCES areas(area_id)
+);
+
+CREATE TABLE faqs (
+  faq_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  faq_question TEXT NOT NULL,
+  faq_fullname TEXT NOT NULL,
+  faq_email TEXT NOT NULL
+);
+
+CREATE TABLE faq_answers (
+  faq_answer_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  faq_id INTEGER NOT NULL,
+  faq_answer TEXT NOT NULL,
+
+  CONSTRAINT faq_id_fk
+    FOREIGN KEY (faq_id)
+      REFERENCES faqs(faq_id)
+);
+
+CREATE TABLE reviews (
+  review_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  review_fullname TEXT NOT NULL,
+  review_email TEXT NOT NULL,
+  review_comment TEXT NOT NULL,
+  review_stars INTEGER NOT NULL,
+
+  CONSTRAINT review_stars_check
+    CHECK (review_stars in (1, 2, 3, 4, 5))
+);
+
+CREATE TABLE event_categories (
+  event_category_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  event_category_name TEXT NOT NULL UNIQUE
+);
+
+CREATE TABLE events (
+  event_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  area_id INTEGER NOT NULL,
+  event_category_id INTEGER NOT NULL,
+  event_name TEXT NOT NULL,
+  event_date TEXT NOT NULL,
+  event_year TEXT NOT NULL,
+  event_interest INTEGER NOT NULL,
+  event_views INTEGER NOT NULL,
+
+  CONSTRAINT area_id_fk
+    FOREIGN KEY (area_id)
+      REFERENCES areas(area_id),
+
+  CONSTRAINT event_category_id_fk
+    FOREIGN KEY (event_category_id)
+      REFERENCES event_categories(event_category_id)
+);
+
+CREATE TABLE contacts (
+  contact_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  contact_message TEXT NOT NULL,
+  contact_fullname TEXT NOT NULL,
+  contact_email TEXT NOT NULL
+);

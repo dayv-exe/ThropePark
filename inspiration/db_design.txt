@@ -1,0 +1,59 @@
+TABLES and rows:
+
+1.) park_images:
+	image_id (PK, integer, AUTO INCREMENT)
+	image_blob (blob)
+	image_desc (not null, text)
+
+2.) areas:
+	area_id (PK, integer, AUTO INCREMENT)
+	image_id (fk, not null, integer)
+	area_name (not null, text, unique)
+	area_desc (not null, text)
+	area_visitors (not null, integer)
+
+3.) rides:
+	ride_id (PK, integer, AUTO INCREMENT)
+	area_id (fk, integer, not null)
+	img_id (fk, not null, integer)
+	ride_name (not null, text, unique)
+	ride_desc (not null text)
+	ride_pukes (not null, integer)
+
+4.) faqs:
+	faq_id (PK, integer, AUTO INCREMENT)
+	faq_question (not null, text)
+	faq_fullname (not null, text)
+	faq_email (not null, text)
+
+5.) faq_answers:
+	faq_answer_id (PK, integer, AUTO INCREMENT)
+	faq_id (fk, integer, not null)
+	faq_answer (not null, text)
+
+6.) reviews:
+	review_id (FK, integer, AUTO INCREMENT)
+	review_fullname (not null, text)
+	review_email (not null, text)
+	review_comment (not null, text)
+	review_stars (not null, integer: constraint: 1, 2, 3, 4, 5)
+
+7.) event_categories:
+	category_id (PK, integer, AUTO INCREMENT)
+	category_name (not null, text, unique)
+
+8.) events:
+	event_id (PK, integer, AUTO INCREMENT)
+	area_id (fk, not null, integer)
+	event_category_id (fk, not null, integer)
+	event_name (not null, text)
+	event_date (not null, text)
+	event_year (not null, text)
+	event_interests (not null, integer)
+	event_views (not null, integer)
+
+9.) contacts:
+	contact_id (PK, integer, AUTO INCREMENT)
+	contact_message (not null, text)
+	contact_fullname (not null, text)
+	contact_email (not null, text)

@@ -239,6 +239,10 @@ main {
   white-space: nowrap;
 }
 
+.max-width{
+  width: 100%;
+}
+
 .carousel-item {
   display: inline-block;
   width: fit-content;
@@ -248,9 +252,16 @@ main {
   width: 100%;
   padding: 1rem;
   background-color: var(--card-bg-color);
+  margin-bottom: 1rem;
 }
-.info-line > p {
-  color: palevioletred;
+.info-line > button{
+  margin-left: 1rem;
+}
+.info-line-warn > p {
+  color: palevioletred!important;
+}
+.info-line-normal > p, .info-line > p {
+  color: var(--site-text-color);
 }
 
 /* #endregion */
@@ -648,7 +659,7 @@ main {
 #contact-wrapper > h2 {
   margin-bottom: 2rem;
 }
-form {
+#contact-form {
   border: 0.15rem solid var(--input-field-bg-color);
   border-radius: 1rem;
   padding: 2rem 3rem;
@@ -666,6 +677,15 @@ form {
     "email message"
     "button button";
   height: 19rem;
+}
+
+form{
+  border: 0.15rem solid var(--input-field-bg-color);
+  border-radius: 1rem;
+  padding: 2rem 3rem;
+  margin: auto;
+  width: 80%;
+  max-width: 1000px;
 }
 
 #name-wrapper,
@@ -713,7 +733,7 @@ form {
 
 /* #region RESPONSIVE */
 @media screen and (max-width: 885px) {
-  form {
+  #contact-form {
     gap: 1rem;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 3fr 1fr;
