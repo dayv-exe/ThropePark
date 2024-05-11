@@ -49,8 +49,6 @@
       return;
     }
 
-    sendToDB("INSERT INTO faqs(faq_question, faq_fullname, faq_email) VALUES (?,?,?)", [faqMessage.value, faqFullname.value, faqEmail.value], () => window.alert("Thank you for your question, we will answer shortly!"), () => window.alert("Failed to ask question try again :("));
-
-    location.reload();
+    sendToDB("INSERT INTO faqs(faq_question, faq_fullname, faq_email) VALUES (?,?,?)", [faqMessage.value, faqFullname.value, faqEmail.value], () => window.alert("Thank you for your question, we will answer shortly! Please refresh the page."), () => window.alert("Failed to ask question try again :("));
   }
 </script>

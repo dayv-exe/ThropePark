@@ -1014,3 +1014,76 @@ form{
 /* #endregion */
 
 /* #endregion */
+
+/* #region EVENT FILTER */
+
+.search-filter-wrapper{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#clear-filters{
+  background-color: transparent;
+}
+
+.filter-wrapper{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-by-wrapper{
+  margin-right: 1rem;
+}
+
+.filter-by-wrapper>input, .filter-wrapper>p, #filter-select{
+  margin-right: .5rem;
+}
+
+#search-event{
+  min-width: 20%;
+  padding: .75rem 1rem;
+  background-color: var(--card-bg-color);
+  border: none;
+  outline: none;
+  border-radius: 1rem;
+}
+
+#filter-select{
+  padding: .5rem;
+  border-radius: .5rem;
+  outline: none;
+  border: none;
+  background-color: var(--card-bg-color);
+}
+
+/* #region RESPONSIVE */
+
+@media screen and (max-width: 885px) {
+  .search-filter-wrapper{
+   flex-direction: column;
+   justify-content: center;
+   align-items: flex-start;
+  }
+
+  .filter-wrapper{
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .filter-wrapper *{
+    margin-bottom: .5rem;
+  }
+
+  #search-event{
+    margin-bottom: 1rem;
+  }
+}
+
+/* #endregion */
+
+/* #endregion */

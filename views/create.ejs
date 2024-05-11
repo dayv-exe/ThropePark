@@ -13,15 +13,14 @@
 <body>
   <%- include('./particles/PageHeader.ejs', {title: "*create*" }) %>
     <main class="center-column">
-      <h2 class="div-title">Backend section of the website</h2>
+      <h2 class="div-title">For backend stuff of the website</h2>
       <p class="card-paragraph">Add stuff to db through here</p>
       <div class="page-padding center-column">
         <div class="add-areas">
           <form id="create-area-form" class="left-center-column create-form">
             <h2 class="div-title">Add Area</h2>
 
-            <label for="area_image_name">Image File Name:</label>
-            <input type="text" name="area_image_name" id="area_image_name">
+            <p>Default image will be used</p>
 
             <label for="area_name">Area Name:</label>
             <input type="text" name="area_name" id="area_name">
@@ -118,27 +117,18 @@
     function handleAreaSubmit(e){
       e.preventDefault();
 
-      const areaImageName = document.getElementById("area_image_name");
       const areaName = document.getElementById("area_name");
       const areaDescription = document.getElementById("area_description");
 
-      const minDescrpLen = 30;
+      const minDescrpLen = 15;
 
-      if (areaImageName.value.length < 5) {
-        window.alert("A VALID image name is required!");
-        areaImageName.focus()
-        return;
-      } else if (areaName.value.length < 3){
-        window.alert("A longer area name of 3 characters or more is required!");
-        areaName.focus()
-        return;
-      } else if (areaDescription.value.split(" ").length < minDescrpLen){
+      if (areaDescription.value.split(" ").length < minDescrpLen){
         window.alert(`A description of ${minDescrpLen} words or more is required for the ${areaName.value}!`);
         areaName.focus()
         return;
       }
 
-      sendToDB("INSERT INTO areas(image_name, area_name, area_description, area_visitors) VALUES (?,?,?,?)", [areaImageName.value, areaName.value, areaDescription.value, 0], () => window.alert("Added to database successfully! Please refresh page"), () => window.alert("Failed to add to the database!"));
+      sendToDB("INSERT INTO areas(image_name, area_name, area_description, area_visitors) VALUES (?,?,?,?)", ["adventure-cove1.jpg", areaName.value, areaDescription.value, 0], () => window.alert("Added to database successfully! Please refresh page"), () => window.alert("Failed to add to the database!"));
       // location.reload();
     }
     areaForm.addEventListener("submit", e => {handleAreaSubmit(e)});
@@ -179,7 +169,7 @@
       const rideDescription = document.getElementById("ride_description");
       const rideAreaSelect = document.getElementById("ride-area-select");
 
-      const minDescrpLen = 30;
+      const minDescrpLen = 15;
 
       if (rideImageName.value.length < 5) {
         window.alert("A VALID image name is required!");
@@ -323,7 +313,7 @@
 
       let chosenDate;
 
-      const minDescrpLen = 30;
+      const minDescrpLen = 15;
 
       if (!eventDate.value) {
         window.alert("A VALID date is required!");

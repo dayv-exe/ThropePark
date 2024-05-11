@@ -19,7 +19,6 @@ function getFromDB(sql, renderFunc, nothingToRenderFunc, errorRenderFunc, params
         data.forEach(row => {
           renderFunc(row);
         });
-        return true;
       }
     })
     .catch(error => {

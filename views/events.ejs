@@ -14,6 +14,29 @@
   <%- include('./particles/PageHeader.ejs', {title: title}) %>
     <main class="center-column">
       <div class="page-padding center-column">
+        <div class="search-filter-wrapper max-width div-bottom-gap">
+          <input type="search" name="search-event" id="search-event" placeholder="Search for an event...">
+
+          <div class="filter-wrapper">
+            <p>Filter by: </p>
+            <div class="filter-by-wrapper center-row">
+              <input type="radio" name="filter-by" id="filter-by-year" checked>
+              <label for="filter-by-year">Year</label>
+            </div>
+
+            <div class="filter-by-wrapper center-row ">
+              <input type="radio" name="filter-by" id="filter-by-category">
+              <label for="filter-by-category">Category</label>
+            </div>
+
+            <select name="filter-select" id="filter-select">
+              <option value="">Select Filter</option>
+            </select>
+
+            <button id="clear-filters" class="image-button">Clear</button>
+          </div>
+        </div>
+
         <div id="upcoming-events-wrapper">
           <h2 class="div-title">Upcoming Events</h2>
 
@@ -35,6 +58,78 @@
 
     <script src="./requester.js"></script>
     <script>
+      const filterDropDown = document.getElementById("filter-select");
+      const searchInput = document.getElementById("search-event");
+      const yearRadioBtn = document.getElementById("filter-by-year");
+      const categoryRadioBtn = document.getElementById("filter-by-category");
+      const clearFiltersBtn = document.getElementById("clear-filters");
+
+      searchInput.addEventListener("keyup", showFilteredEvents);
+      filterDropDown.addEventListener("change", showFilteredEvents);
+      clearFiltersBtn.addEventListener("click", clearFilters);
+      yearRadioBtn.addEventListener("click", loadYears);
+      categoryRadioBtn.addEventListener("click", loadEventCategories);
+
+      const upComingEventsWrapper = document.getElementById("upcoming-events-wrapper");
+      const concludedEventsWrapper = document.getElementById("concluded-events-wrapper");
+
+      const upComingEventsSQL = `select * from events where julianday(event_date) >= julianday(Date('now'))`;
+      const pastEventsSQL = `select * from events where julianday(event_date) < julianday(Date('now'))`;
+
+      let searchText = "";
+      let filterYear = "";
+      let filterCategory = "";
+
+      function setTitleNormal() {
+        upComingEventsWrapper.innerHTML = `
+          <h2 class="div-title">Upcoming Events</h2>
+
+          <div id="ev-wrapper" class="events div-top-gap">
+
+          </div>
+        `;
+        concludedEventsWrapper.innerHTML = `
+            <h2 class="div-title">Concluded Events</h2>
+
+            <div id="ev-wrapper-concluded" class="events div-top-gap">
+
+            </div>
+        `;
+      }
+
+      function setTitleSearch() {
+        let searchTitle = "Results for ";
+
+        if (searchInput.value.length > 0){
+          searchTitle += `"${searchInput.value}"`;
+        } else {
+          searchTitle += `events`;
+        }
+
+        if (categoryRadioBtn.checked && filterDropDown.value){
+          searchTitle += ` in the "${filterDropDown.options[filterDropDown.selectedIndex].innerHTML}" category.`;
+        } else if (yearRadioBtn.checked && filterDropDown.value){
+          searchTitle += ` in the year ${filterDropDown.value}.`;
+        } else {
+          searchTitle += ".";
+        }
+
+        upComingEventsWrapper.innerHTML = `
+          <h2 class="div-title">${searchTitle}</h2>
+
+          <div id="ev-wrapper" class="events div-top-gap">
+
+          </div>
+        `;
+        concludedEventsWrapper.innerHTML = "";
+      }
+
+      function showNoSuchEvent() {
+        show(`
+          <p>No results :(</p>
+        `, document.getElementById("upcoming-events-wrapper"));
+      }
+
       function showEvents(event) {
         function showEventCategories(event_category) {
           show(`
@@ -79,7 +174,35 @@
         `, document.getElementById("upcoming-events-wrapper"));
       }
 
-      getFromDB(`select * from events where julianday(event_date) >= julianday(Date('now'))`, showEvents, showNoEvent, errorGettingEvents);
+      function showAllEvents() {
+        setTitleNormal();
+        getFromDB(upComingEventsSQL, showEvents, showNoEvent, errorGettingEvents);
+        getFromDB(pastEventsSQL, showPastEvents, showNoPastEvent, errorGettingPastEvents);
+      }
+
+      function showFilteredEvents() {
+        const searchAndYearEventsSQL = `select * from events where event_name LIKE '%${searchInput.value}%' COLLATE NOCASE AND event_year LIKE '%${filterDropDown.value}%'`;
+
+        const searchAndCategoryEventsSQL = `select * from events where event_name LIKE '%${searchInput.value}%' COLLATE NOCASE AND event_category_id LIKE '%${filterDropDown.value}%'`;
+
+        if (searchInput.value == "" && filterDropDown.value == "") {
+          showAllEvents();
+        } else {
+          setTitleSearch();
+
+          if (yearRadioBtn.checked) {
+            getFromDB(searchAndYearEventsSQL, showEvents, showNoSuchEvent, errorGettingEvents);
+          } else if (categoryRadioBtn.checked) {
+            getFromDB(searchAndCategoryEventsSQL, showEvents, showNoSuchEvent, errorGettingEvents);
+          }
+        }
+      }
+
+      function clearFilters() {
+        searchInput.value = "";
+        filterDropDown.selectedIndex = 0;
+        showAllEvents();
+      }
 
       function showPastEvents(event) {
         function showEventCategories(event_category) {
@@ -125,7 +248,48 @@
         `, document.getElementById("concluded-events-wrapper"));
       }
 
-      getFromDB(`select * from events where julianday(event_date) < julianday(Date('now'))`, showPastEvents, showNoPastEvent, errorGettingPastEvents);
+      function doNothing() {
+
+      }
+
+      function loadYears() {
+        getFromDB(`SELECT event_year FROM events GROUP BY event_year ORDER BY event_year asc`, insertYears, doNothing, () => window.alert("Unable to fetch years!"));
+
+        filterDropDown.innerHTML = "";
+        const defaultOpt = document.createElement("option");
+        defaultOpt.value = "";
+        defaultOpt.innerHTML = "Select Year";
+        filterDropDown.appendChild(defaultOpt);
+
+        function insertYears(year) {
+          const opt = document.createElement("option");
+          opt.value = year.event_year;
+          opt.innerHTML = year.event_year;
+
+          filterDropDown.appendChild(opt);
+        }
+      }
+
+      function loadEventCategories() {
+        getFromDB(`SELECT * FROM event_categories ORDER BY event_category_name asc`, insertEventCategories, doNothing, () => window.alert("Unable to fetch event categories!"));
+
+        filterDropDown.innerHTML = "";
+        const defaultOpt = document.createElement("option");
+        defaultOpt.value = "";
+        defaultOpt.innerHTML = "Select Category";
+        filterDropDown.appendChild(defaultOpt);
+
+        function insertEventCategories(eventCategory) {
+          const opt = document.createElement("option");
+          opt.value = eventCategory.event_category_id;
+          opt.innerHTML = eventCategory.event_category_name;
+
+          filterDropDown.appendChild(opt);
+        }
+      }
+
+      showAllEvents();
+      loadYears();
     </script>
 
 </body>

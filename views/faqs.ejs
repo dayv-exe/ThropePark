@@ -83,7 +83,7 @@
           sendToDB("INSERT INTO faq_answers(faq_id, faq_answer) VALUES (?,?)", [
             id,
             ans.value
-          ], () => window.alert("Thank you for your answer!"), () => window.alert("Failed to answer question try again :("));
+          ], () => window.alert("Thank you for your answer! Please refresh the page."), () => window.alert("Failed to answer question try again :("));
         }
       }
     </script>

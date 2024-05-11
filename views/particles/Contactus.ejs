@@ -33,9 +33,9 @@
   const fullname = document.getElementById("contact-name");
   const email = document.getElementById("contact-email");
   const message = document.getElementById("contact-message");
-  form.addEventListener("submit", e => { handleSubmit(e) });
+  form.addEventListener("submit", e => { handleContactSubmit(e) });
 
-  function handleSubmit(e) {
+  function handleContactSubmit(e) {
     e.preventDefault();
 
     if (fullname.value.length < 2) {
