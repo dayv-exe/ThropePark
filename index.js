@@ -79,7 +79,4 @@ app.post('/getData', (req, res) => {
 });
 
 // !!!ENABLE BEFORE SUBMISSION!!!
-// app.listen(5000, () => console.log('Server started!'));
-
-// !!!DISABLE BEFORE SUBMISSION!!!
-app.listen(8000, () => console.log('Server started!'));
+app.listen(5000, () => console.log('Server started!'));
